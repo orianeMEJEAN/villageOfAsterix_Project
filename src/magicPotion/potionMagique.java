@@ -123,6 +123,12 @@ public class potionMagique {
         System.out.println("Marmite remplie ! " + DOSES_PAR_MARMITE + " doses disponibles.\n");
     }
 
+    //Méthode pour ajouter une marmite pour pouvoir en boire deux
+    public void ajouterMarmite() {
+        nombreDoses += DOSES_PAR_MARMITE;
+        System.out.println("Marmite ajoutée ! " + DOSES_PAR_MARMITE + " doses supplémentaires disponibles.\n");
+    }
+
     // Getters
     public int getNombreDoses() {
         return nombreDoses;
