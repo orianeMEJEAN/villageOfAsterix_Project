@@ -1,7 +1,4 @@
-package magicPotion;
-
-import java.util.Arrays;
-import java.util.List;
+package MagicPotion;
 
 /**
  * Représente la potion magique d'Astérix et Obélix.
@@ -14,7 +11,7 @@ import java.util.List;
  * @author Lou
  * @version 1.0
  */
-public class potionMagique {
+public class PotionMagique {
 
     /** Liste des ingrédients optionnels
      * qui rend la potion nourrissante ou donne des pouvoirs
@@ -37,7 +34,7 @@ public class potionMagique {
      *
      * Crée une nouvelle potion avec 10 doses
      */
-    public potionMagique() {
+    public PotionMagique() {
         this.nombreDoses = DOSES_PAR_MARMITE;
     }
 

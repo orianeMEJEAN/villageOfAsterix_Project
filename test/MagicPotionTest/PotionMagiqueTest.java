@@ -1,5 +1,6 @@
-package magicPotion;
+package MagicPotionTest;
 
+import MagicPotion.PotionMagique;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PotionMagiqueTest {
 
     /** Instance de potion utilisée pour les tests */
-    private potionMagique potion;
+    private PotionMagique potion;
 
     /**
      * Initialise une nouvelle instance de potionMagique
      */
     @BeforeEach
     public void setUp() {
-        potion = new potionMagique();
+        potion = new PotionMagique();
     }
 
     // TESTS DU CONSTRUCTEUR
