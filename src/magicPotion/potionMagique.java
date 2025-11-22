@@ -218,6 +218,15 @@ public class potionMagique {
     public void afficherRecette() {
         System.out.println("\nRECETTE DE LA POTION MAGIQUE");
         System.out.println("Ingrédients de base :");
+        System.out.println("  - Gui");
+        System.out.println("  - Carottes");
+        System.out.println("  - Sel");
+        System.out.println("  - Trèfle à quatre feuilles");
+        System.out.println("  - Poisson passablement frais");
+        System.out.println("  - Huile de roche");
+        System.out.println("  - Miel");
+        System.out.println("  - Hydromel");
+        System.out.println("  - Ingredient secret");
 
         if (avecHomard || avecFraises || avecJusBetterave ||
                 avecLaitLicorne || avecPoilsIdefix) {
