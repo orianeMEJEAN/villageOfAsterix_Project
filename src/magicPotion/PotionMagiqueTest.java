@@ -4,10 +4,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Classe de tests unitaires pour la classe potionMagique.
+ *
+ * Test le bon fonctionnement de la classe potionMagique
+ *
+ * @author Lou
+ * @version 1.0
+ */
 public class PotionMagiqueTest {
 
+    /** Instance de potion utilisée pour les tests */
     private potionMagique potion;
 
+    /**
+     * Initialise une nouvelle instance de potionMagique
+     */
     @BeforeEach
     public void setUp() {
         potion = new potionMagique();
@@ -15,170 +27,195 @@ public class PotionMagiqueTest {
 
     // TESTS DU CONSTRUCTEUR
 
+    /**
+     * Vérifie que le constructeur initialise la potion avec 10 doses.
+     */
     @Test
-    public void testConstructeur_PotionDemarreAvec10Doses() {
-        // On vérifie que la nouvelle potion a bien 10 doses
+    public void testPotionDemarreAvec10Doses() {
         assertEquals(10, potion.getNombreDoses());
     }
 
+    /**
+     * Sans ajout d'ingrédients,
+     * la potion ne doit pas être nourrissante.
+     */
     @Test
-    public void testConstructeur_PotionPasNourrisanteAuDepart() {
-        // Au départ la potion ne devrais pas etre nourrissante
+    public void testPotionPasNourrisante() {
         assertFalse(potion.estNourrissante());
     }
 
     // TESTS DES INGRÉDIENTS OPTIONNELS
 
+    /**
+     * Vérifie que l'ajout de homard rend la potion nourrissante.
+     */
     @Test
-    public void testAjouterHomard_RendPotionNourrissante() {
-        // On ajoute du homard
+    public void testAjouterHomard() {
         potion.ajouterHomard();
-        // On vérifie que la potion est nourrissante
         assertTrue(potion.estNourrissante());
     }
 
+    /**
+     * Vérifie que l'ajout de fraises rend la potion nourrissante.
+     */
     @Test
-    public void testAjouterFraises_RendPotionNourrissante() {
-        // On ajoute des fraises
+    public void testAjouterFraises() {
         potion.ajouterFraises();
 
-        // On vérifie que la potion est nourrissante
         assertTrue(potion.estNourrissante());
     }
 
+    /**
+     * Vérifie que le remplacement par du jus de betterave rend la potion nourrissante.
+     */
     @Test
-    public void testRemplacerParJusBetterave_RendPotionNourrissante() {
-        // On remplace par du jus de betterave
+    public void testRemplacerParJusBetterave() {
         potion.remplacerParJusBetterave();
 
-        // On vérifie que la potion est nourrissante
         assertTrue(potion.estNourrissante());
     }
 
+    /**
+     * Vérifie que l'ajout de lait de licorne ne provoque pas d'erreur.
+     */
     @Test
-    public void testAjouterLaitLicorne_NePasCasser() {
-        // On vérifie juste que l'ajout marche
+    public void testAjouterLaitLicorne() {
         assertDoesNotThrow(() -> potion.ajouterLaitLicorne());
     }
 
+    /**
+     * Vérifie que l'ajout de poils d'Idéfix ne provoque pas d'erreur.
+     */
     @Test
-    public void testAjouterPoilsIdefix_NePasCasser() {
-        // On vérifie juste que l'ajout marche
+    public void testAjouterPoilsIdefix() {
         assertDoesNotThrow(() -> potion.ajouterPoilsIdefix());
     }
 
     // TESTS DE BOIRE UNE DOSE
 
+    /**
+     * Vérifie que boire une dose diminue le stock de 1.
+     */
     @Test
-    public void testBoireUneDose_DiminueLesDoesDeUn() {
-        // On boit une dose
+    public void testBoireUneDose() {
         potion.boireUneDose();
 
-        // On vérifie qu'il reste 9 doses
         assertEquals(9, potion.getNombreDoses());
     }
 
+    /**
+     * Vérifie que boireUneDose() retourne true quand des doses sont disponibles.
+     */
     @Test
-    public void testBoireUneDose_RetourneTrue_QuandDoesDisponibles() {
-        // boireUneDose() devrait retourner true
+    public void testBoireUneDoseRetourneTrue() {
         boolean resultat = potion.boireUneDose();
 
         assertTrue(resultat);
     }
 
+    /**
+     * Vérifie que boireUneDose() retourne false quand la marmite est vide.
+     */
     @Test
-    public void testBoireUneDose_RetourneFalse_QuandMarmiteVide() {
-        // On boit toutes les doses
-        //boucle pour boire 10 doses
+    public void testBoireUneDoseRetourneFalse() {
         for (int i = 0; i < 10; i++) {
             potion.boireUneDose();
         }
 
-        // On essaie de boire une 11ème dose
         boolean resultat = potion.boireUneDose();
-        //on verifie que l'ont ne peut pas
         assertFalse(resultat);
     }
 
     // TESTS DE BOIRE UNE MARMITE
 
+    /**
+     * Vérifie que boire une marmite utilise 10 doses.
+     */
     @Test
-    public void testBoireUneMarmite_ConsommeDixDoses() {
-        // On boit une marmite entière
+    public void testBoireUneMarmite() {
         potion.boireUneMarmite();
-        // On vérifie qu'il reste 0 doses
         assertEquals(0, potion.getNombreDoses());
     }
 
+    /**
+     * Vérifie que boireUneMarmite() retourne true avec assez de doses.
+     */
     @Test
-    public void testBoireUneMarmite_RetourneTrue_QuandAssezDeDoses() {
-        // boireUneMarmite() devrait retourner true si ça marche
+    public void testBoireUneMarmiteRetourneTrue() {
         boolean resultat = potion.boireUneMarmite();
         assertTrue(resultat);
     }
 
     // TESTS DE BOIRE DEUX MARMITES
 
+    /**
+     * Vérifie que boireDeuxMarmites() retourne false sans assez de doses.
+     */
     @Test
-    public void testBoireDeuxMarmites_RetourneFalse_QuandPasAssezDeDoses() {
-        // On a seulement 10 doses, mais il en faut 20
+    public void testBoireDeuxMarmitesRetourneFalse() {
         boolean resultat = potion.boireDeuxMarmites();
         assertFalse(resultat);
     }
 
+    /**
+     * Vérifie que boireDeuxMarmites() retourne true avec assez de doses.
+     */
     @Test
-    public void testBoireDeuxMarmites_RetourneTrue_AvecAssezDeDoses() {
-        potion.ajouterMarmite(); // Maintenant on a 20 doses
+    public void testBoireDeuxMarmitesRetourneTrue() {
+        potion.ajouterMarmite();
         boolean resultat = potion.boireDeuxMarmites();
         assertTrue(resultat);
     }
 
+    /**
+     * Vérifie que boire deux marmites consomme 20 doses.
+     */
     @Test
-    public void testBoireDeuxMarmites_ConsommeVingtDoses() {
-        // On remplit pour avoir 20 doses
+    public void testBoireDeuxMarmites() {
         potion.ajouterMarmite();
-        // On boit deux marmites
         potion.boireDeuxMarmites();
-        // On vérifie qu'il reste 0 doses
         assertEquals(0, potion.getNombreDoses());
     }
 
     // TESTS DE REMPLIR LA MARMITE
 
+    /**
+     * Vérifie que remplirMarmite() remet 10 doses
+     */
     @Test
-    public void testRemplirMarmite_QuandMarmiteVide() {
-        // On vide complètement la marmite
+    public void testRemplirMarmite() {
         potion.boireUneMarmite();
-        // On remplit
         potion.remplirMarmite();
 
-        // On vérifie qu'on a bien 10 doses
         assertEquals(10, potion.getNombreDoses());
     }
 
     // TESTS DE LA MÉTHODE AFFICHER RECETTE
 
+    /**
+     * Vérifie que afficherRecette() ne provoque pas d'erreur.
+     */
     @Test
-    public void testAfficherRecette_NePasCasser() {
-        // On vérifie juste que l'affichage marche
+    public void testAfficherRecette() {
         assertDoesNotThrow(() -> potion.afficherRecette());
     }
 
+    /**
+     * Vérifie que afficherRecette() fonctionne avec des ingrédients ajoutés.
+     */
     @Test
-    public void testAfficherRecette_AvecIngredients() {
-        // On ajoute des ingrédients
+    public void testAfficherRecetteAvecIngredients() {
         potion.ajouterHomard();
         potion.ajouterLaitLicorne();
-        // On vérifie que l'affichage marche
         assertDoesNotThrow(() -> potion.afficherRecette());
     }
 
-
+    /**
+     * Scénario d'utilisation normale.
+     * Permet de vérifier que toutes les fonctionnalités fonctionnent ensemble.
+     */
     @Test
-    public void testScenarioComplet_UtilisationNormale() {
-        // Scénario : Créer une potion, ajouter des ingrédients,
-        // boire quelques doses, remplir, et re-boire
-
+    public void testUtilisationNormale() {
         potion.ajouterFraises();
         assertTrue(potion.estNourrissante());
 
