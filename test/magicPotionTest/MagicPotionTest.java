@@ -1,6 +1,6 @@
-package MagicPotionTest;
+package magicPotionTest;
 
-import MagicPotion.MagicPotion;
+import magicPotion.MagicPotion;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;

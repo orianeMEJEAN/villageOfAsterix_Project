@@ -1,4 +1,4 @@
-package MagicPotion;
+package magicPotion;
 
 /**
  * Represents the magic potion of Asterix and Obelix.
