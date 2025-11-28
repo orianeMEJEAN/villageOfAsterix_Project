@@ -11,7 +11,7 @@ package MagicPotion;
  * @author Lou
  * @version 1.0
  */
-public class PotionMagique {
+public class MagicPotion {
 
     /** Liste des ingrédients optionnels
      * qui rend la potion nourrissante ou donne des pouvoirs
@@ -33,7 +33,7 @@ public class PotionMagique {
      *
      * Crée une nouvelle potion avec 10 doses
      */
-    public PotionMagique() {
+    public MagicPotion() {
         this.nombreDoses = DOSES_PAR_MARMITE;
     }
 
@@ -41,7 +41,7 @@ public class PotionMagique {
      * Ajoute du homard à la potion,
      * rend la potion nourrissante
      */
-    public void ajouterHomard() {
+    public void addLobster() {
         this.avecHomard = true;
         System.out.println("Homard ajouté - Potion plus nourrissante !");
     }
@@ -50,7 +50,7 @@ public class PotionMagique {
      * Ajoute des fraises à la potion.
      * rend la potion nourrissante
      */
-    public void ajouterFraises() {
+    public void addStrawberries() {
         this.avecFraises = true;
         System.out.println("Fraises ajoutées - Potion plus nourrissante !");
     }
@@ -59,7 +59,7 @@ public class PotionMagique {
      * Remplace l'huile de roche par du jus de betterave,
      *rend la potion nourrissante
      */
-    public void remplacerParJusBetterave() {
+    public void replaceByBeetJuice() {
         this.avecJusBetterave = true;
         System.out.println("Huile de roche remplacée par du jus de betterave - Potion plus nourrissante !");
     }
@@ -68,7 +68,7 @@ public class PotionMagique {
      * Ajoute du lait de licorne à deux têtes à la potion.
      * Donne un pouvoir de dédoublement
      */
-    public void ajouterLaitLicorne() {
+    public void addUnicornMilk() {
         this.avecLaitLicorne = true;
         System.out.println("Lait de licorne à deux têtes ajouté - Pouvoir de dédoublement !");
     }
@@ -77,7 +77,7 @@ public class PotionMagique {
      * Ajoute des poils d'Idéfix à la potion.
      * Donne un pouvoir de métamorphose
      */
-    public void ajouterPoilsIdefix() {
+    public void addIdefixsHair() {
         this.avecPoilsIdefix = true;
         System.out.println("Poils d'Idéfix ajoutés - Pouvoir de métamorphosis !");
     }
@@ -89,7 +89,7 @@ public class PotionMagique {
      *
      * @return true si une dose a pu être consommée, false si la marmite est vide
      */
-    public boolean boireUneDose() {
+    public boolean drinkADose() {
         if (nombreDoses <= 0) {
             System.out.println("La marmite est vide !");
             return false;
@@ -122,7 +122,7 @@ public class PotionMagique {
      *
      * @return true si une marmite a pu être consommée, false s'il n'y a pas assez de doses
      */
-    public boolean boireUneMarmite() {
+    public boolean drinkAPot() {
         if (nombreDoses < DOSES_PAR_MARMITE) {
             System.out.println("Doses insuffisante !");
             return false;
@@ -154,7 +154,7 @@ public class PotionMagique {
      *
      * @return true si deux marmites ont pu être consommées, false s'il n'y a pas assez de doses
      */
-    public boolean boireDeuxMarmites() {
+    public boolean drinkTwoPots() {
         if (nombreDoses < DOSES_PAR_MARMITE * 2) {
             System.out.println("Pas assez de doses !");
             return false;
@@ -172,7 +172,7 @@ public class PotionMagique {
      * Remplit complètement la marmite.
      * Réinitialise le nombre de doses à 10
      */
-    public void remplirMarmite() {
+    public void fillPot() {
         nombreDoses = DOSES_PAR_MARMITE;
         System.out.println("Marmite remplie ! " + DOSES_PAR_MARMITE + " doses disponibles.\n");
     }
@@ -182,7 +182,7 @@ public class PotionMagique {
      * Augmente le nombre de doses disponibles de 10.
      * Pour préparer la consommation de deux marmites.
      */
-    public void ajouterMarmite() {
+    public void addPot() {
         nombreDoses += DOSES_PAR_MARMITE;
         System.out.println("Marmite ajoutée ! " + DOSES_PAR_MARMITE + " doses supplémentaires disponibles.\n");
     }
@@ -192,7 +192,7 @@ public class PotionMagique {
      *
      * @return le nombre de doses dans la marmite
      */
-    public int getNombreDoses() {
+    public int getDoses() {
         return nombreDoses;
     }
 
@@ -201,7 +201,7 @@ public class PotionMagique {
      *
      * @return true si la potion est nourrissante, false sinon
      */
-    public boolean estNourrissante() {
+    public boolean isNourishing() {
         return avecHomard || avecFraises || avecJusBetterave;
     }
 
@@ -211,7 +211,7 @@ public class PotionMagique {
      * Affiche les ingrédients
      * et le nombre de doses actuellement disponibles.
      */
-    public void afficherRecette() {
+    public void printRecipe() {
         System.out.println("\nRECETTE DE LA POTION MAGIQUE");
         System.out.println("Ingrédients de base :");
         System.out.println("  - Gui");
