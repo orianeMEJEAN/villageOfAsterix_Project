@@ -1,146 +1,146 @@
 package MagicPotion;
 
 /**
- * Représente la potion magique d'Astérix et Obélix.
+ * Represents the magic potion of Asterix and Obelix.
  *
- * Cette classe permet de créer une potion et de rajouter différents ingrédients,
- * qui donne des "pouvoirs",
- * de la consommer par doses ou marmites entières, et de gérer son stock.
- * Une marmite contient 10 doses par défaut.
+ * This class allows creating a potion and adding various ingredients
+ * that grant "powers", consuming it by doses or by whole pots,
+ * and managing its stock.
+ * One pot contains 10 doses by default.
  *
  * @author Lou
  * @version 1.0
  */
 public class MagicPotion {
 
-    /** Liste des ingrédients optionnels
-     * qui rend la potion nourrissante ou donne des pouvoirs
+    /** List of optional ingredients
+     * that makes the potion nourishing or grants powers
      */
-    private boolean avecHomard;
-    private boolean avecFraises;
-    private boolean avecJusBetterave;
-    private boolean avecLaitLicorne;
-    private boolean avecPoilsIdefix;
+    private boolean withLobster;
+    private boolean withStrawberries;
+    private boolean withBeetJuice;
+    private boolean withUnicornMilk;
+    private boolean withIdefixsHair;
 
-    /** Nombre de doses disponibles dans la marmite */
-    private int nombreDoses;
+    /** Number of doses available in the pot */
+    private int doseNumber;
 
-    /** Nombre de doses dans une marmite */
-    private static final int DOSES_PAR_MARMITE = 10;
+    /** Number of doses available in the pot */
+    private static final int DOSES_PER_POT = 10;
 
     /**
-     * Constructeur de la potion magique.
+     * Magic potion constructor.
      *
-     * Crée une nouvelle potion avec 10 doses
+     * Creates a new potion with 10 doses
      */
     public MagicPotion() {
-        this.nombreDoses = DOSES_PAR_MARMITE;
+        this.doseNumber = DOSES_PER_POT;
     }
 
     /**
-     * Ajoute du homard à la potion,
-     * rend la potion nourrissante
+     * Adds lobster to the potion,
+     * makes the potion nourishing
      */
     public void addLobster() {
-        this.avecHomard = true;
+        this.withLobster = true;
         System.out.println("Homard ajouté - Potion plus nourrissante !");
     }
 
     /**
-     * Ajoute des fraises à la potion.
-     * rend la potion nourrissante
+     * Adds strawberries to the potion.
+     * Makes the potion nourishing
      */
     public void addStrawberries() {
-        this.avecFraises = true;
+        this.withStrawberries = true;
         System.out.println("Fraises ajoutées - Potion plus nourrissante !");
     }
 
     /**
-     * Remplace l'huile de roche par du jus de betterave,
-     *rend la potion nourrissante
+     * Replaces rock oil with beetroot juice,
+     * makes the potion nourishing
      */
     public void replaceByBeetJuice() {
-        this.avecJusBetterave = true;
+        this.withBeetJuice = true;
         System.out.println("Huile de roche remplacée par du jus de betterave - Potion plus nourrissante !");
     }
 
     /**
-     * Ajoute du lait de licorne à deux têtes à la potion.
-     * Donne un pouvoir de dédoublement
+     * Adds two-headed unicorn milk to the potion.
+     * Grants duplication power
      */
     public void addUnicornMilk() {
-        this.avecLaitLicorne = true;
+        this.withUnicornMilk = true;
         System.out.println("Lait de licorne à deux têtes ajouté - Pouvoir de dédoublement !");
     }
 
     /**
-     * Ajoute des poils d'Idéfix à la potion.
-     * Donne un pouvoir de métamorphose
+     * Adds Idéfix's fur to the potion.
+     * Grants metamorphosis power
      */
     public void addIdefixsHair() {
-        this.avecPoilsIdefix = true;
+        this.withIdefixsHair = true;
         System.out.println("Poils d'Idéfix ajoutés - Pouvoir de métamorphosis !");
     }
 
     /**
-     * Permet de boire une seule dose de potion.
-     * Diminue le nombre de doses de 1 et affiche
-     * les pouvoirs obtenus
+     * Allows drinking a single dose of potion.
+     * Decreases the number of doses by 1 and displays
+     * the obtained powers
      *
-     * @return true si une dose a pu être consommée, false si la marmite est vide
+     * @return true if a dose could be consumed, false if the pot is empty
      */
     public boolean drinkADose() {
-        if (nombreDoses <= 0) {
+        if (doseNumber <= 0) {
             System.out.println("La marmite est vide !");
             return false;
         }
 
-        //boire une dose
-        nombreDoses--;
+        // drink one dose
+        doseNumber--;
 
-        // Afficher les effets obtenus
+        // Display obtained effects
         System.out.println("\n une dose bu!");
         System.out.println("Effets temporaires obtenus :");
         System.out.println("  - Force surhumaine");
         System.out.println("  - Invincibilité");
 
-        // Effets spéciaux avec les ingrédients
-        if (avecLaitLicorne) {
+        // Special effects from ingredients
+        if (withUnicornMilk) {
             System.out.println("  - Dédoublement");
         }
-        if (avecPoilsIdefix) {
+        if (withIdefixsHair) {
             System.out.println("  - Métamorphose");
         }
 
-        System.out.println("Doses restantes : " + nombreDoses + "\n");
+        System.out.println("Doses restantes : " + doseNumber + "\n");
         return true;
     }
 
     /**
-     * Permet de boire une marmite entière de potion
-     * et affiches les pouvoirs obtenu
+     * Allows drinking an entire pot of potion
+     * and displays the obtained powers
      *
-     * @return true si une marmite a pu être consommée, false s'il n'y a pas assez de doses
+     * @return true if a pot could be consumed, false if there are not enough doses
      */
     public boolean drinkAPot() {
-        if (nombreDoses < DOSES_PAR_MARMITE) {
+        if (doseNumber < DOSES_PER_POT) {
             System.out.println("Doses insuffisante !");
             return false;
         }
 
-        //boire la marmite entière
-        nombreDoses -= DOSES_PAR_MARMITE;
+        // drink the whole pot
+        doseNumber -= DOSES_PER_POT;
 
-        // Afficher les effets permanents
+        // Display permanent effects
         System.out.println("\n marmite bu !");
         System.out.println("Effets permanents obtenus :");
         System.out.println("  - Force");
         System.out.println("  - Invincibilité");
 
-        if (avecLaitLicorne) {
+        if (withUnicornMilk) {
             System.out.println("  - Dédoublement");
         }
-        if (avecPoilsIdefix) {
+        if (withIdefixsHair) {
             System.out.println("  - Métamorphose");
         }
 
@@ -149,18 +149,18 @@ public class MagicPotion {
     }
 
     /**
-     * Permet de boire deux marmites entières de potion
-     * Nécessite au moins 20 doses disponibles
+     * Allows drinking two entire pots of potion.
+     * Requires at least 20 doses available
      *
-     * @return true si deux marmites ont pu être consommées, false s'il n'y a pas assez de doses
+     * @return true if two pots could be consumed, false if there are not enough doses
      */
     public boolean drinkTwoPots() {
-        if (nombreDoses < DOSES_PAR_MARMITE * 2) {
+        if (doseNumber < DOSES_PER_POT * 2) {
             System.out.println("Pas assez de doses !");
             return false;
         }
 
-        nombreDoses -= DOSES_PAR_MARMITE * 2;
+        doseNumber -= DOSES_PER_POT * 2;
 
         System.out.println("\n deux marmites bu !");
         System.out.println("Transformation en statue de granit !");
@@ -169,47 +169,47 @@ public class MagicPotion {
     }
 
     /**
-     * Remplit complètement la marmite.
-     * Réinitialise le nombre de doses à 10
+     * Completely refills the pot.
+     * Resets the number of doses to 10
      */
     public void fillPot() {
-        nombreDoses = DOSES_PAR_MARMITE;
-        System.out.println("Marmite remplie ! " + DOSES_PAR_MARMITE + " doses disponibles.\n");
+        doseNumber = DOSES_PER_POT;
+        System.out.println("Marmite remplie ! " + DOSES_PER_POT + " doses disponibles.\n");
     }
 
     /**
-     * Ajoute une marmite de potion.
-     * Augmente le nombre de doses disponibles de 10.
-     * Pour préparer la consommation de deux marmites.
+     * Adds one pot of potion.
+     * Increases the number of available doses by 10.
+     * To prepare the consumption of two pots.
      */
     public void addPot() {
-        nombreDoses += DOSES_PAR_MARMITE;
-        System.out.println("Marmite ajoutée ! " + DOSES_PAR_MARMITE + " doses supplémentaires disponibles.\n");
+        doseNumber += DOSES_PER_POT;
+        System.out.println("Marmite ajoutée ! " + DOSES_PER_POT + " doses supplémentaires disponibles.\n");
     }
 
     /**
-     * Retourne le nombre de doses actuellement disponibles.
+     * Returns the number of currently available doses.
      *
-     * @return le nombre de doses dans la marmite
+     * @return the number of doses in the pot
      */
     public int getDoses() {
-        return nombreDoses;
+        return doseNumber;
     }
 
     /**
-     * Vérifie si la potion est nourrissante.
+     * Checks whether the potion is nourishing.
      *
-     * @return true si la potion est nourrissante, false sinon
+     * @return true if the potion is nourishing, false otherwise
      */
     public boolean isNourishing() {
-        return avecHomard || avecFraises || avecJusBetterave;
+        return withLobster || withStrawberries || withBeetJuice;
     }
 
     /**
-     * Affiche la recette complète de la potion.
+     * Displays the full recipe of the potion.
      *
-     * Affiche les ingrédients
-     * et le nombre de doses actuellement disponibles.
+     * Shows the ingredients
+     * and the currently available number of doses.
      */
     public void printRecipe() {
         System.out.println("\nRECETTE DE LA POTION MAGIQUE");
@@ -224,16 +224,16 @@ public class MagicPotion {
         System.out.println("  - Hydromel");
         System.out.println("  - Ingredient secret");
 
-        if (avecHomard || avecFraises || avecJusBetterave ||
-                avecLaitLicorne || avecPoilsIdefix) {
+        if (withLobster || withStrawberries || withBeetJuice ||
+                withUnicornMilk || withIdefixsHair) {
             System.out.println("\nIngrédients spéciaux ajoutés :");
-            if (avecHomard) System.out.println("  - Homard");
-            if (avecFraises) System.out.println("  - Fraises");
-            if (avecJusBetterave) System.out.println("  - Jus de betterave");
-            if (avecLaitLicorne) System.out.println("  - Lait de licorne à deux têtes");
-            if (avecPoilsIdefix) System.out.println("  - Poils d'Idéfix");
+            if (withLobster) System.out.println("  - Homard");
+            if (withStrawberries) System.out.println("  - Fraises");
+            if (withBeetJuice) System.out.println("  - Jus de betterave");
+            if (withUnicornMilk) System.out.println("  - Lait de licorne à deux têtes");
+            if (withIdefixsHair) System.out.println("  - Poils d'Idéfix");
         }
 
-        System.out.println("\n Doses disponibles : " + nombreDoses);
+        System.out.println("\n Doses disponibles : " + doseNumber);
     }
 }

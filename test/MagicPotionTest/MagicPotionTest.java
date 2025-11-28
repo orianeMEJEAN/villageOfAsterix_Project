@@ -6,30 +6,30 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Classe de tests unitaires pour la classe potionMagique.
+ * Unit test class for the MagicPotion class.
  *
- * Test le bon fonctionnement de la classe potionMagique
+ * Tests the correct behavior of the MagicPotion class.
  *
  * @author Lou
  * @version 1.0
  */
 public class MagicPotionTest {
 
-    /** Instance de potion utilisée pour les tests */
+    /** Potion instance used for the tests */
     private MagicPotion potion;
 
     /**
-     * Initialise une nouvelle instance de potionMagique
+     * Initializes a new instance of MagicPotion
      */
     @BeforeEach
     public void setUp() {
         potion = new MagicPotion();
     }
 
-    // TESTS DU CONSTRUCTEUR
+    // CONSTRUCTOR TESTS
 
     /**
-     * Vérifie que le constructeur initialise la potion avec 10 doses.
+     * Checks that the constructor initializes the potion with 10 doses.
      */
     @Test
     public void testPotionStratsWith10Doses() {
@@ -37,18 +37,18 @@ public class MagicPotionTest {
     }
 
     /**
-     * Sans ajout d'ingrédients,
-     * la potion ne doit pas être nourrissante.
+     * Without adding ingredients,
+     * the potion must not be nourishing.
      */
     @Test
     public void testPotionNotNourishing() {
         assertFalse(potion.isNourishing());
     }
 
-    // TESTS DES INGRÉDIENTS OPTIONNELS
+    // OPTIONAL INGREDIENT TESTS
 
     /**
-     * Vérifie que l'ajout de homard rend la potion nourrissante.
+     * Checks that adding lobster makes the potion nourishing.
      */
     @Test
     public void testAddLobster() {
@@ -57,7 +57,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que l'ajout de fraises rend la potion nourrissante.
+     * Checks that adding strawberries makes the potion nourishing.
      */
     @Test
     public void testAddStrawberries() {
@@ -67,7 +67,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que le remplacement par du jus de betterave rend la potion nourrissante.
+     * Checks that replacing with beet juice makes the potion nourishing.
      */
     @Test
     public void testReplaceByBeetJuice() {
@@ -77,7 +77,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que l'ajout de lait de licorne ne provoque pas d'erreur.
+     * Checks that adding unicorn milk does not cause any error.
      */
     @Test
     public void testAddUnicornMilk() {
@@ -85,17 +85,17 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que l'ajout de poils d'Idéfix ne provoque pas d'erreur.
+     * Checks that adding Idefix's hair does not cause any error.
      */
     @Test
     public void testaddIdefixsHair() {
         assertDoesNotThrow(() -> potion.addIdefixsHair());
     }
 
-    // TESTS DE BOIRE UNE DOSE
+    // DRINK ONE DOSE TESTS
 
     /**
-     * Vérifie que boire une dose diminue le stock de 1.
+     * Checks that drinking one dose decreases the stock by 1.
      */
     @Test
     public void testdrinkADose() {
@@ -105,7 +105,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que boireUneDose() retourne true quand des doses sont disponibles.
+     * Checks that drinkADose() returns true when doses are available.
      */
     @Test
     public void testDrinkADoseReturnsTrue() {
@@ -115,7 +115,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que boireUneDose() retourne false quand la marmite est vide.
+     * Checks that drinkADose() returns false when the pot is empty.
      */
     @Test
     public void testDrinkADosereturnsFalse() {
@@ -127,10 +127,10 @@ public class MagicPotionTest {
         assertFalse(resultat);
     }
 
-    // TESTS DE BOIRE UNE MARMITE
+    // DRINK ONE POT TESTS
 
     /**
-     * Vérifie que boire une marmite utilise 10 doses.
+     * Checks that drinking one pot uses 10 doses.
      */
     @Test
     public void testDrinkAPot() {
@@ -139,7 +139,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que boireUneMarmite() retourne true avec assez de doses.
+     * Checks that drinkAPot() returns true when there are enough doses.
      */
     @Test
     public void testDrinkAPotReturnsTrue() {
@@ -147,10 +147,10 @@ public class MagicPotionTest {
         assertTrue(resultat);
     }
 
-    // TESTS DE BOIRE DEUX MARMITES
+    // DRINK TWO POTS TESTS
 
     /**
-     * Vérifie que boireDeuxMarmites() retourne false sans assez de doses.
+     * Checks that drinkTwoPots() returns false without enough doses.
      */
     @Test
     public void testDrinkTwoPotsReturnsFalse() {
@@ -159,7 +159,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que boireDeuxMarmites() retourne true avec assez de doses.
+     * Checks that drinkTwoPots() returns true when there are enough doses.
      */
     @Test
     public void testDrinkTwoPotsReturnsTrue() {
@@ -169,7 +169,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que boire deux marmites consomme 20 doses.
+     * Checks that drinking two pots consumes 20 doses.
      */
     @Test
     public void testDrinkTwoPots() {
@@ -178,10 +178,10 @@ public class MagicPotionTest {
         assertEquals(0, potion.getDoses());
     }
 
-    // TESTS DE REMPLIR LA MARMITE
+    // FILL POT TESTS
 
     /**
-     * Vérifie que remplirMarmite() remet 10 doses
+     * Checks that fillPot() restores 10 doses.
      */
     @Test
     public void testFillPot() {
@@ -191,10 +191,10 @@ public class MagicPotionTest {
         assertEquals(10, potion.getDoses());
     }
 
-    // TESTS DE LA MÉTHODE AFFICHER RECETTE
+    // PRINT RECIPE METHOD TESTS
 
     /**
-     * Vérifie que afficherRecette() ne provoque pas d'erreur.
+     * Checks that printRecipe() does not cause any error.
      */
     @Test
     public void testPrintRecipe() {
@@ -202,7 +202,7 @@ public class MagicPotionTest {
     }
 
     /**
-     * Vérifie que afficherRecette() fonctionne avec des ingrédients ajoutés.
+     * Checks that printRecipe() works with added ingredients.
      */
     @Test
     public void testPrintRecipeWithAddedIngredients() {
@@ -212,8 +212,8 @@ public class MagicPotionTest {
     }
 
     /**
-     * Scénario d'utilisation normale.
-     * Permet de vérifier que toutes les fonctionnalités fonctionnent ensemble.
+     * Normal usage scenario.
+     * Ensures that all features work together properly.
      */
     @Test
     public void normaleUseTest() {
