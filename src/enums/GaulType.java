@@ -1,0 +1,10 @@
+package enums;
+
+public enum GaulType {
+    NONE,
+    MERCHANT,
+    INNKEEPER,
+    DRUID,
+    BLACKSMITH
+
+}
