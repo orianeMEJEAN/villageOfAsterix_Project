@@ -22,7 +22,6 @@ public class PotionMagique {
     private boolean avecLaitLicorne;
     private boolean avecPoilsIdefix;
 
-    // Propriétés de la potion
     /** Nombre de doses disponibles dans la marmite */
     private int nombreDoses;
 
