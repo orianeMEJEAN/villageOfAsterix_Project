@@ -1,6 +1,7 @@
 package characters.fantasy;
 
 import enums.Gender;
+import magicPotion.MagicPotion;
 
 public class Lycanthrope extends FantasyCreature {
     /**
@@ -15,7 +16,7 @@ public class Lycanthrope extends FantasyCreature {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     belligerence level
-     * @param magicPotionLevel current magic potion amount
+     * @param magicPotion current magic potion amount
      */
     public Lycanthrope(String name,
                        Gender gender,
@@ -26,9 +27,9 @@ public class Lycanthrope extends FantasyCreature {
                        int health,
                        int hunger,
                        int belligerence,
-                       int magicPotionLevel
+                       MagicPotion magicPotion
     ) {
         super(name, gender, height, age, strength, endurance,
-                health, hunger, belligerence, magicPotionLevel);
+                health, hunger, belligerence, magicPotion);
     }
 }

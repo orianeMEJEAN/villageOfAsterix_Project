@@ -1,9 +1,11 @@
 package characters.gauls;
 
+import characters.Character;
 import characters.Leader;
 import characters.Worker;
 import enums.GaulType;
 import enums.Gender;
+import magicPotion.MagicPotion;
 
 /**
  * Handles the creation of a Druid
@@ -22,7 +24,7 @@ public class Druid extends Gaul implements Leader {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     aggressivity level
-     * @param magicPotionLevel current magic potion amount
+     * @param magicPotion current magic potion amount
      */
     public Druid(String name,
                  Gender gender,
@@ -33,10 +35,10 @@ public class Druid extends Gaul implements Leader {
                  int health,
                  int hunger,
                  int belligerence,
-                 int magicPotionLevel
+                 MagicPotion magicPotion
     ) {
         super(name, gender, height, age, strength, endurance, health,
-                hunger, belligerence, magicPotionLevel, GaulType.DRUID);
+                hunger, belligerence, magicPotion, GaulType.DRUID);
     }
 
     /**
@@ -47,12 +49,21 @@ public class Druid extends Gaul implements Leader {
         System.out.println(getName() + " is leading...");
     }
 
+    public void heal(Character character, int points){
+        character.heal(points);
+    }
+
     /**
      * Makes the Druid make a poition pot
      * TODO
      * Implémenter une classe marmite afin d'avoir une marmite avec x dose de potion magique.
      */
-    public void makePotion(){
+    public void makePotion()
+    {
         System.out.println("Making Potion...");
+
+
+
+        System.out.println("Potion Made !");
     }
 }

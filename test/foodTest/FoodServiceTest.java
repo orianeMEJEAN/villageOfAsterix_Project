@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-import food.Ingredient;
+import food.enums.Ingredient;
 import food.FoodService;
 import food.HealthResult;
-import characters.PersonType;
+import enums.PersonType;
 
 /**
  * Suite of unit tests for the FoodService class.

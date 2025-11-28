@@ -1,5 +1,10 @@
 package magicPotion;
 
+import food.enums.Ingredient;
+import characters.inventory.Inventory;
+
+import java.util.Set;
+
 /**
  * Represents the magic potion of Asterix and Obelix.
  *
@@ -9,7 +14,7 @@ package magicPotion;
  * One pot contains 10 doses by default.
  *
  * @author Lou
- * @version 1.0
+ * @version 2.0
  */
 public class MagicPotion {
 
@@ -22,19 +27,74 @@ public class MagicPotion {
     private boolean withUnicornMilk;
     private boolean withIdefixsHair;
 
-    /** Number of doses available in the pot */
+    /** Number of doses available in the pot
+     */
     private int doseNumber;
 
-    /** Number of doses available in the pot */
+    /** Number of doses available in the pot
+     */
     private static final int DOSES_PER_POT = 10;
 
     /**
      * Magic potion constructor.
      *
-     * Creates a new potion with 10 doses
+     * Creates a new potion with 10 doses if all base ingredients are available
      */
-    public MagicPotion() {
+    public MagicPotion(Set<Ingredient> availableIngredients) {
+        if (!checkMainIngredients(inventory)) {
+            throw new IllegalArgumentException("Ingrédients de base manquants pour créer la potion !");
+        }
         this.doseNumber = DOSES_PER_POT;
+        System.out.println("Potion magique créée avec succès !");
+    }
+
+    /**
+     * Verify if the base ingredients are avaible
+     *
+     * @param inventory
+     * @return Boolean
+     */
+    private boolean checkMainIngredients(Inventory<Ingredient> inventory) {
+        System.out.println("\nVÉRIFICATION DES INGRÉDIENTS");
+
+        // List of main ingredients
+        Ingredient[] baseIngredients = {
+                Ingredient.mistletoe,
+                Ingredient.carrots,
+                Ingredient.salt,
+                Ingredient.freshFourLeafClover,
+                Ingredient.moderatelyFreshFish,
+                Ingredient.rockOil,
+                Ingredient.honey,
+                Ingredient.mead,
+                Ingredient.secretIngredient
+        };
+
+        boolean allPresent = true;
+
+        // Check main Ingredients
+        for (Ingredient ingredient : baseIngredients) {
+            if (!hasIngredient(inventory, ingredient)) {
+                System.out.println("Ingrédient manquant : " + ingredient.getDisplayName());
+                allPresent = false;
+            }
+        }
+
+        if (allPresent) {
+            System.out.println("Tous les ingrédients de base sont présents !");
+        }
+        return allPresent;
+    }
+
+    /**
+     * Checks if a specific ingredient is present in the inventory.
+     *
+     * @param inventory the inventory to search in
+     * @param ingredient the ingredient to look for
+     * @return true if the ingredient is found, false otherwise
+     */
+    private boolean hasIngredient(Inventory<Ingredient> inventory, Ingredient ingredient) {
+        return inventory.getItems().contains(ingredient);
     }
 
     /**
@@ -183,8 +243,10 @@ public class MagicPotion {
      * To prepare the consumption of two pots.
      */
     public void addPot() {
+        if (checkBaseIngredients(inventory)) == true {
         doseNumber += DOSES_PER_POT;
         System.out.println("Marmite ajoutée ! " + DOSES_PER_POT + " doses supplémentaires disponibles.\n");
+        }
     }
 
     /**

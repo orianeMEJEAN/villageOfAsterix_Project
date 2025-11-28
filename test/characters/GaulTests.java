@@ -82,7 +82,7 @@ public class GaulTests {
 
         asterix.drinkPotion(3);
 
-        assertEquals(3, asterix.getMagicPotionLevel());
+        assertEquals(3, asterix.getMagicPotion());
     }
 
     @Test

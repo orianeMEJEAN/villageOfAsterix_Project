@@ -1,6 +1,9 @@
 package characters;
 
+import characters.inventory.Inventory;
 import enums.Gender;
+import enums.PersonType;
+import magicPotion.MagicPotion;
 
 /**
  * Represents a generic character in the game world.
@@ -20,7 +23,9 @@ public abstract class Character {
     private int health;
     private int hunger;
     private int belligerence;
-    private int magicPotionLevel;
+    private MagicPotion magicPotion;
+    private final PersonType personType;
+    private Inventory inventory;
 
     private final int maxHealth;
     private final int maxHunger;
@@ -37,7 +42,7 @@ public abstract class Character {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     belligerence level
-     * @param magicPotionLevel current magic potion amount
+     * @param magicPotion current magic potion quantity
      */
     public Character(String name,
                      Gender gender,
@@ -48,7 +53,8 @@ public abstract class Character {
                      int health,
                      int hunger,
                      int belligerence,
-                     int magicPotionLevel
+                     MagicPotion magicPotion,
+                     PersonType personType
     ) {
 
         this.name = name;
@@ -62,7 +68,8 @@ public abstract class Character {
         this.hunger = hunger;
         this.maxHunger = hunger;
         this.belligerence = belligerence;
-        this.magicPotionLevel = magicPotionLevel;
+        this.magicPotion = magicPotion;
+        this.personType =  personType;
 
     }
 
@@ -87,11 +94,14 @@ public abstract class Character {
 
     /**
      * Drinks a dose of magic potion.
-     *
-     * @param dose amount of potion to drink
      */
-    public void drinkPotion(int dose){
-        this.magicPotionLevel += dose;
+    public boolean drinkPotion(){
+        if (magicPotion != null) {
+            return magicPotion.drinkADose();
+        } else {
+            System.out.println(this.name + "Il n'y a pas de potion à boire");
+            return false;
+        }
     }
 
     /**
@@ -220,8 +230,11 @@ public abstract class Character {
      *
      * @return the magic potion amount
      */
-    public int getMagicPotionLevel() {
-        return magicPotionLevel;
+    public int getMagicPotion() {
+        if (magicPotion != null) {
+            return magicPotion.getDoses();
+        }
+        return 0;
     }
 
     /**
@@ -324,10 +337,18 @@ public abstract class Character {
     /**
      * Sets the current magic potion level.
      *
-     * @param magicPotionLevel the new potion amount
+     * @param magicPotion the new potion amount
      */
-    public void setMagicPotionLevel(int magicPotionLevel) {
-        this.magicPotionLevel = magicPotionLevel;
+    public void setMagicPotion(MagicPotion magicPotion) {
+        this.magicPotion = magicPotion;
+    }
+
+    /**
+     * Returns the person's type (Gaul, Roman, ...).
+     */
+    public PersonType getPersonType()
+    {
+        return personType;
     }
 
     /**
@@ -350,8 +371,7 @@ public abstract class Character {
                 ", hunger=" + hunger +
                 ", maxHunger=" + maxHunger +
                 ", belligerence=" + belligerence +
-                ", magicPotionLevel=" + magicPotionLevel +
+                ", magicPotionDose=" + magicPotion +
                 '}';
     }
-
 }

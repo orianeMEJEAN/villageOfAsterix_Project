@@ -8,9 +8,7 @@
  * @author Oriane
  * @version 1.0
  */
-package food;
-
-import java.util.Set;
+package food.enums;
 
 public enum Ingredient
 {

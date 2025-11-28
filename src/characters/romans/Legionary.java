@@ -1,6 +1,7 @@
 package characters.romans;
 
 import enums.Gender;
+import magicPotion.MagicPotion;
 
 /**
  * Handles the creation of a roman Legionary
@@ -9,16 +10,16 @@ public class Legionary extends Roman {
     /**
      * Creates a new character with all base attributes.
      *
-     * @param name             character's name
-     * @param gender           biological gender
-     * @param height           height in centimeters
-     * @param age              age in years
-     * @param strength         physical strength
-     * @param endurance        resistance to damage
-     * @param health           current health points
-     * @param hunger           current hunger level
-     * @param belligerence     belligerence level
-     * @param magicPotionLevel current magic potion amount
+     * @param name              character's name
+     * @param gender            biological gender
+     * @param height            height in centimeters
+     * @param age               age in years
+     * @param strength          physical strength
+     * @param endurance         resistance to damage
+     * @param health            current health points
+     * @param hunger            current hunger level
+     * @param belligerence      belligerence level
+     * @param magicPotion       current magic potion amount
      */
     public Legionary(String name,
                    Gender gender,
@@ -29,9 +30,9 @@ public class Legionary extends Roman {
                    int health,
                    int hunger,
                    int belligerence,
-                   int magicPotionLevel
+                   MagicPotion magicPotion
     ) {
         super(name, gender, height, age, strength, endurance,
-                health,hunger, belligerence, magicPotionLevel);
+                health,hunger, belligerence, magicPotion);
     }
 }

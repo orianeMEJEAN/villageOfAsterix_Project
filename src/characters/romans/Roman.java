@@ -1,6 +1,8 @@
 package characters.romans;
 
 import enums.Gender;
+import enums.PersonType;
+import magicPotion.MagicPotion;
 
 public class Roman extends characters.Character {
 
@@ -18,7 +20,7 @@ public class Roman extends characters.Character {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     belligerence level
-     * @param magicPotionLevel current magic potion amount
+     * @param magicPotion current magic potion amount
      */
     public Roman(String name,
                  Gender gender,
@@ -29,10 +31,11 @@ public class Roman extends characters.Character {
                  int health,
                  int hunger,
                  int belligerence,
-                 int magicPotionLevel
+                 MagicPotion magicPotion
     ) {
         super(name, gender, height, age, strength, endurance,
-                health, hunger, belligerence, magicPotionLevel);
+                health, hunger, belligerence, magicPotion,
+                PersonType.roman);
     }
 
 

@@ -9,9 +9,9 @@
  * @author Oriane
  * @version 1.0
  */
-package characters;
+package enums;
 
-import food.Ingredient;
+import food.enums.Ingredient;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -19,6 +19,7 @@ import java.util.Set;
 public enum PersonType
 {
     gaul,
+    fantasy,
     roman;
 
     /**
@@ -45,6 +46,9 @@ public enum PersonType
                         Ingredient.wine,
                         Ingredient.mead
                 );
+
+            case fantasy:
+
 
             default:
                 return null;

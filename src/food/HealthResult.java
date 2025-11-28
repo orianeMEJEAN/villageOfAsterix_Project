@@ -7,9 +7,11 @@
  * The information provided during construction cannot be modified afterwards.
  *
  * @author Oriane
- * @version 1.0
+ * @version 2.0
  */
 package food;
+
+import food.enums.HealthIssue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,19 +20,17 @@ import java.util.List;
 public class HealthResult
 {
     private final boolean healthy;
-    private final List<String> issues;
+    private final List<HealthIssue> issues;
 
     /**
      * Creates a new health result.
      *
-     * @param healthy true if the item is considered healthy,
-     *                false otherwise
-     * @param issues a list of detected issues
+     * @param healthy true if the item is considered healthy, false otherwise
+     * @param issues  a list of detected issues (may be empty)
      */
-    public HealthResult(boolean healthy, List<String> issues)
-    {
+    public HealthResult(boolean healthy, List<HealthIssue> issues) {
         this.healthy = healthy;
-        this.issues = new ArrayList<>(issues);
+        this.issues = new ArrayList<>(issues == null ? List.of() : issues);
     }
 
     /**
@@ -45,7 +45,7 @@ public class HealthResult
      *
      * @return an unmodifiable view of the issues list
      */
-    public List<String> getIssues() { return Collections.unmodifiableList(issues); }
+    public List<HealthIssue> getIssues() { return Collections.unmodifiableList(issues); }
 
     /**
      * Provides a textual representation of the health result.
