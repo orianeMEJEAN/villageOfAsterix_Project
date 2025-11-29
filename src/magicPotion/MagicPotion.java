@@ -1,63 +1,79 @@
 package magicPotion;
 
 import food.enums.Ingredient;
-import characters.inventory.Inventory;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Represents the magic potion of Asterix and Obelix.
  *
- * This class allows creating a potion and adding various ingredients
- * that grant "powers", consuming it by doses or by whole pots,
- * and managing its stock.
- * One pot contains 10 doses by default.
+ * This class models the effects of a brewed magic potion based on
+ * the list of ingredients used to create it. It validates that all
+ * required base ingredients are present and limits the number of
+ * special ingredients that grant additional powers.
+ *
+ * The potion can be nourishing (lobster, strawberries, beetroot juice)
+ * or can grant special powers depending on the presence of specific
+ * ingredients such as two-headed unicorn milk or Idéfix's hair.
  *
  * @author Lou
- * @version 2.0
+ * @subauthor Oriane &amp; Maxence
+ * @version 4.0
  */
 public class MagicPotion {
-
     /** List of optional ingredients
      * that makes the potion nourishing or grants powers
      */
     private boolean withLobster;
     private boolean withStrawberries;
     private boolean withBeetJuice;
+
     private boolean withUnicornMilk;
     private boolean withIdefixsHair;
 
-    /** Number of doses available in the pot
-     */
-    private int doseNumber;
-
-    /** Number of doses available in the pot
-     */
-    private static final int DOSES_PER_POT = 10;
+    private final int specialIngredientsThreshold = 1;
 
     /**
-     * Magic potion constructor.
+     * Builds a magic potion from the given list of ingredients.
      *
-     * Creates a new potion with 10 doses if all base ingredients are available
+     * The constructor:
+     *     checks that all mandatory base ingredients are present,
+     *     checks that the number of special ingredients does not exceed
+     *         {@link #specialIngredientsThreshold},
+     *     initializes internal flags according to the provided ingredients.
+     *
+     * @param ingredients the list of ingredients used to brew the potion
+     * @throws IllegalArgumentException if some base ingredients are missing
+     *                                  or if too many special ingredients are present
      */
-    public MagicPotion(Set<Ingredient> availableIngredients) {
-        if (!checkMainIngredients(inventory)) {
+    public MagicPotion(List<Ingredient> ingredients){
+        if (!checkIngredients(ingredients)){
             throw new IllegalArgumentException("Ingrédients de base manquants pour créer la potion !");
         }
-        this.doseNumber = DOSES_PER_POT;
-        System.out.println("Potion magique créée avec succès !");
+
+        this.withLobster = ingredients.contains(Ingredient.lobster);
+        this.withStrawberries = ingredients.contains(Ingredient.strawberries);
+        this.withBeetJuice = ingredients.contains(Ingredient.beetrootJuice);
+
+        this.withUnicornMilk = ingredients.contains(Ingredient.twoHeadedUnicornMilk);
+        this.withIdefixsHair = ingredients.contains(Ingredient.idefixHair);
     }
 
     /**
-     * Verify if the base ingredients are avaible
+     * Validates the list of ingredients used to brew the potion.
      *
-     * @param inventory
-     * @return Boolean
+     * This method checks:
+     *
+     *     that all base ingredients are present,
+     *     that the number of special ingredients does not exceed
+     *         {@link #specialIngredientsThreshold}.
+     *
+     *
+     * @param ingredients the list of ingredients to validate
+     * @return {@code true} if the ingredients are valid, {@code false} otherwise
      */
-    private boolean checkMainIngredients(Inventory<Ingredient> inventory) {
-        System.out.println("\nVÉRIFICATION DES INGRÉDIENTS");
+    private boolean checkIngredients(List<Ingredient> ingredients) {
 
-        // List of main ingredients
         Ingredient[] baseIngredients = {
                 Ingredient.mistletoe,
                 Ingredient.carrots,
@@ -70,192 +86,35 @@ public class MagicPotion {
                 Ingredient.secretIngredient
         };
 
-        boolean allPresent = true;
+        Ingredient[] specialIngredients = {
+                Ingredient.twoHeadedUnicornMilk,
+                Ingredient.idefixHair
+        };
 
-        // Check main Ingredients
+        boolean valid = true;
+
         for (Ingredient ingredient : baseIngredients) {
-            if (!hasIngredient(inventory, ingredient)) {
+            if (!ingredients.contains(ingredient)) {
                 System.out.println("Ingrédient manquant : " + ingredient.getDisplayName());
-                allPresent = false;
+                valid = false;
             }
         }
 
-        if (allPresent) {
-            System.out.println("Tous les ingrédients de base sont présents !");
-        }
-        return allPresent;
-    }
+        int specialCount = 0;
 
-    /**
-     * Checks if a specific ingredient is present in the inventory.
-     *
-     * @param inventory the inventory to search in
-     * @param ingredient the ingredient to look for
-     * @return true if the ingredient is found, false otherwise
-     */
-    private boolean hasIngredient(Inventory<Ingredient> inventory, Ingredient ingredient) {
-        return inventory.getItems().contains(ingredient);
-    }
-
-    /**
-     * Adds lobster to the potion,
-     * makes the potion nourishing
-     */
-    public void addLobster() {
-        this.withLobster = true;
-        System.out.println("Homard ajouté - Potion plus nourrissante !");
-    }
-
-    /**
-     * Adds strawberries to the potion.
-     * Makes the potion nourishing
-     */
-    public void addStrawberries() {
-        this.withStrawberries = true;
-        System.out.println("Fraises ajoutées - Potion plus nourrissante !");
-    }
-
-    /**
-     * Replaces rock oil with beetroot juice,
-     * makes the potion nourishing
-     */
-    public void replaceByBeetJuice() {
-        this.withBeetJuice = true;
-        System.out.println("Huile de roche remplacée par du jus de betterave - Potion plus nourrissante !");
-    }
-
-    /**
-     * Adds two-headed unicorn milk to the potion.
-     * Grants duplication power
-     */
-    public void addUnicornMilk() {
-        this.withUnicornMilk = true;
-        System.out.println("Lait de licorne à deux têtes ajouté - Pouvoir de dédoublement !");
-    }
-
-    /**
-     * Adds Idéfix's fur to the potion.
-     * Grants metamorphosis power
-     */
-    public void addIdefixsHair() {
-        this.withIdefixsHair = true;
-        System.out.println("Poils d'Idéfix ajoutés - Pouvoir de métamorphosis !");
-    }
-
-    /**
-     * Allows drinking a single dose of potion.
-     * Decreases the number of doses by 1 and displays
-     * the obtained powers
-     *
-     * @return true if a dose could be consumed, false if the pot is empty
-     */
-    public boolean drinkADose() {
-        if (doseNumber <= 0) {
-            System.out.println("La marmite est vide !");
-            return false;
+        for (Ingredient ingredient : specialIngredients) {
+            if (ingredients.contains(ingredient)) {
+                specialCount++;
+            }
         }
 
-        // drink one dose
-        doseNumber--;
-
-        // Display obtained effects
-        System.out.println("\n une dose bu!");
-        System.out.println("Effets temporaires obtenus :");
-        System.out.println("  - Force surhumaine");
-        System.out.println("  - Invincibilité");
-
-        // Special effects from ingredients
-        if (withUnicornMilk) {
-            System.out.println("  - Dédoublement");
-        }
-        if (withIdefixsHair) {
-            System.out.println("  - Métamorphose");
+        if (specialCount > specialIngredientsThreshold) {
+            System.out.println("Trop d'ingrédients spéciaux ! (" +
+                    specialCount + "/" + specialIngredientsThreshold + ")");
+            valid = false;
         }
 
-        System.out.println("Doses restantes : " + doseNumber + "\n");
-        return true;
-    }
-
-    /**
-     * Allows drinking an entire pot of potion
-     * and displays the obtained powers
-     *
-     * @return true if a pot could be consumed, false if there are not enough doses
-     */
-    public boolean drinkAPot() {
-        if (doseNumber < DOSES_PER_POT) {
-            System.out.println("Doses insuffisante !");
-            return false;
-        }
-
-        // drink the whole pot
-        doseNumber -= DOSES_PER_POT;
-
-        // Display permanent effects
-        System.out.println("\n marmite bu !");
-        System.out.println("Effets permanents obtenus :");
-        System.out.println("  - Force");
-        System.out.println("  - Invincibilité");
-
-        if (withUnicornMilk) {
-            System.out.println("  - Dédoublement");
-        }
-        if (withIdefixsHair) {
-            System.out.println("  - Métamorphose");
-        }
-
-        System.out.println();
-        return true;
-    }
-
-    /**
-     * Allows drinking two entire pots of potion.
-     * Requires at least 20 doses available
-     *
-     * @return true if two pots could be consumed, false if there are not enough doses
-     */
-    public boolean drinkTwoPots() {
-        if (doseNumber < DOSES_PER_POT * 2) {
-            System.out.println("Pas assez de doses !");
-            return false;
-        }
-
-        doseNumber -= DOSES_PER_POT * 2;
-
-        System.out.println("\n deux marmites bu !");
-        System.out.println("Transformation en statue de granit !");
-        System.out.println();
-        return true;
-    }
-
-    /**
-     * Completely refills the pot.
-     * Resets the number of doses to 10
-     */
-    public void fillPot() {
-        doseNumber = DOSES_PER_POT;
-        System.out.println("Marmite remplie ! " + DOSES_PER_POT + " doses disponibles.\n");
-    }
-
-    /**
-     * Adds one pot of potion.
-     * Increases the number of available doses by 10.
-     * To prepare the consumption of two pots.
-     */
-    public void addPot() {
-        if (checkBaseIngredients(inventory)) == true {
-        doseNumber += DOSES_PER_POT;
-        System.out.println("Marmite ajoutée ! " + DOSES_PER_POT + " doses supplémentaires disponibles.\n");
-        }
-    }
-
-    /**
-     * Returns the number of currently available doses.
-     *
-     * @return the number of doses in the pot
-     */
-    public int getDoses() {
-        return doseNumber;
+        return valid;
     }
 
     /**
@@ -295,7 +154,5 @@ public class MagicPotion {
             if (withUnicornMilk) System.out.println("  - Lait de licorne à deux têtes");
             if (withIdefixsHair) System.out.println("  - Poils d'Idéfix");
         }
-
-        System.out.println("\n Doses disponibles : " + doseNumber);
     }
 }

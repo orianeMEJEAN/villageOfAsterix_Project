@@ -5,7 +5,6 @@ import characters.Leader;
 import characters.Worker;
 import enums.GaulType;
 import enums.Gender;
-import magicPotion.MagicPotion;
 
 /**
  * Handles the creation of a Druid
@@ -24,7 +23,7 @@ public class Druid extends Gaul implements Leader {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     aggressivity level
-     * @param magicPotion current magic potion amount
+     * @param magicPotionLevel current magic potion amount
      */
     public Druid(String name,
                  Gender gender,
@@ -35,10 +34,10 @@ public class Druid extends Gaul implements Leader {
                  int health,
                  int hunger,
                  int belligerence,
-                 MagicPotion magicPotion
+                 int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance, health,
-                hunger, belligerence, magicPotion, GaulType.DRUID);
+                hunger, belligerence, magicPotionLevel, GaulType.DRUID);
     }
 
     /**

@@ -3,6 +3,7 @@ package characters;
 import characters.gauls.Gaul;
 import enums.GaulType;
 import enums.Gender;
+import magicPotion.Pot;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +21,7 @@ public class GaulTests {
                 100,
                 5,
                 3,
-                null,
+                0,
                 GaulType.NONE
         );
 
@@ -34,7 +35,7 @@ public class GaulTests {
                 100,
                 5,
                 3,
-                null,
+                0,
                 GaulType.NONE
         );
 
@@ -55,7 +56,7 @@ public class GaulTests {
                 100,
                 10,
                 5,
-                null,
+                0,
                 GaulType.NONE
         );
 
@@ -76,13 +77,13 @@ public class GaulTests {
                 100,
                 5,
                 5,
-                null,
+                0,
                 GaulType.NONE
         );
 
         asterix.drinkPotion();
 
-        assertEquals(3, asterix.getMagicPotion());
+        assertEquals(3, asterix.getMagicPotionLevel());
     }
 
     @Test
@@ -97,7 +98,7 @@ public class GaulTests {
                 1,
                 5,
                 5,
-                null,
+                0,
                 GaulType.NONE
         );
 

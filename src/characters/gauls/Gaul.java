@@ -5,7 +5,6 @@ import characters.Worker;
 import enums.GaulType;
 import enums.Gender;
 import enums.PersonType;
-import magicPotion.MagicPotion;
 
 /**
  * Represents a Gaul character, a cultural subgroup of characters
@@ -33,7 +32,7 @@ public class Gaul extends characters.Character  implements Worker {
      * @param health            current health points
      * @param hunger            current hunger level
      * @param belligerence      aggressivity level
-     * @param magicPotion  current magic potion amount
+     * @param magicPotionLevel  current magic potion amount
      * @param type              Gaul's type use None as a default parameter
      */
     public Gaul(String name,
@@ -45,11 +44,11 @@ public class Gaul extends characters.Character  implements Worker {
                     int health,
                     int hunger,
                     int belligerence,
-                    MagicPotion magicPotion,
+                    int magicPotionLevel,
                     GaulType type
     ) {
         super(name, gender, height, age, strength, endurance,
-                health, hunger, belligerence, magicPotion,
+                health, hunger, belligerence, magicPotionLevel,
                 PersonType.gaul);
         this.type = type;
     }
@@ -100,7 +99,7 @@ public class Gaul extends characters.Character  implements Worker {
                 ", hunger=" + getHunger() +
                 ", maxHunger=" + getMaxHunger() +
                 ", belligerence=" + getBelligerence() +
-                ", magicPotion=" + getMagicPotion() +
+                ", magicPotionLevel=" + getMagicPotionLevel() +
                 ", type=" + getType() +
                 '}';
     }

@@ -1,3 +1,13 @@
+/**
+ * Unit tests (number 2) for FoodService.
+ *
+ * These tests use a minimal implementation of Character (TestCharacter)
+ * in order to instantiate a concrete character for testing.
+ *
+ * @author Oriane
+ * @version 2.0
+ */
+
 package FoodTest;
 
 import org.junit.jupiter.api.Test;

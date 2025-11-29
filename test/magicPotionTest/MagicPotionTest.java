@@ -1,8 +1,13 @@
 package magicPotionTest;
 
 import magicPotion.MagicPotion;
+import food.enums.Ingredient;
+import characters.inventory.Inventory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -11,20 +16,36 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests the correct behavior of the MagicPotion class.
  *
  * @author Lou
- * @version 1.0
+ * @version 2.0
  */
 public class MagicPotionTest {
 
     /** Potion instance used for the tests */
     private MagicPotion potion;
 
+    private Inventory<Ingredient> inventory;
+
     /**
      * Initializes a new instance of MagicPotion
      */
     @BeforeEach
     public void setUp() {
-        potion = new MagicPotion();
-    }
+        inventory = new Inventory<>();
+
+
+    // Add all base ingredients
+        inventory.addItem(Ingredient.mistletoe);
+        inventory.addItem(Ingredient.carrots);
+        inventory.addItem(Ingredient.salt);
+        inventory.addItem(Ingredient.freshFourLeafClover);
+        inventory.addItem(Ingredient.moderatelyFreshFish);
+        inventory.addItem(Ingredient.rockOil);
+        inventory.addItem(Ingredient.honey);
+        inventory.addItem(Ingredient.mead);
+        inventory.addItem(Ingredient.secretIngredient);
+
+    potion = new MagicPotion((Set<Ingredient>) inventory.getItems());
+}
 
     // CONSTRUCTOR TESTS
 

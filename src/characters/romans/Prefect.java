@@ -2,7 +2,6 @@ package characters.romans;
 
 import characters.Leader;
 import enums.Gender;
-import magicPotion.MagicPotion;
 
 /**
  * Handles the creation of a roman prefect
@@ -20,7 +19,7 @@ public class Prefect extends Roman implements Leader {
      * @param health            current health points
      * @param hunger            current hunger level
      * @param belligerence      belligerence level
-     * @param magicPotion       current magic potion amount
+     * @param magicPotionLevel       current magic potion amount
      */
     public Prefect(String name,
                    Gender gender,
@@ -31,10 +30,10 @@ public class Prefect extends Roman implements Leader {
                    int health,
                    int hunger,
                    int belligerence,
-                   MagicPotion magicPotion
+                   int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance,
-                health,hunger, belligerence, magicPotion);
+                health,hunger, belligerence, magicPotionLevel);
     }
 
     /**

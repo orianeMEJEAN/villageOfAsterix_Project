@@ -14,27 +14,13 @@ public class InventoryTest {
 
     @BeforeEach
     void setUp() {
-        inventory = new Inventory<>(3);
+        inventory = new Inventory<>();
     }
 
     @Test
     void testAddItemSuccess() {
-        boolean result = inventory.addItem("Potion");
-        assertTrue(result);
+        inventory.addItem("Potion");
         assertEquals(1, inventory.getItems().size());
-    }
-
-    @Test
-    void testAddItemFailsWhenFull() {
-        inventory.addItem("A");
-        inventory.addItem("B");
-        inventory.addItem("C");
-
-        assertTrue(inventory.isFull());
-
-        boolean result = inventory.addItem("D");
-        assertFalse(result);
-        assertEquals(3, inventory.getItems().size());
     }
 
     @Test
@@ -55,33 +41,5 @@ public class InventoryTest {
 
         assertFalse(result);
         assertEquals(1, inventory.getItems().size());
-    }
-
-    @Test
-    void testIsFull() {
-        assertFalse(inventory.isFull());
-
-        inventory.addItem("A");
-        inventory.addItem("B");
-        inventory.addItem("C");
-
-        assertTrue(inventory.isFull());
-    }
-
-    @Test
-    void testGetCapacity() {
-        assertEquals(3, inventory.getCapacity());
-    }
-
-    @Test
-    void testSetCapacity() {
-        inventory.setCapacity(10);
-        assertEquals(10, inventory.getCapacity());
-
-        inventory.addItem("A");
-        inventory.addItem("B");
-        inventory.addItem("C");
-
-        assertEquals(3, inventory.getItems().size());
     }
 }

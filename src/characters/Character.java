@@ -4,6 +4,7 @@ import characters.inventory.Inventory;
 import enums.Gender;
 import enums.PersonType;
 import magicPotion.MagicPotion;
+import magicPotion.Pot;
 
 /**
  * Represents a generic character in the game world.
@@ -23,9 +24,12 @@ public abstract class Character {
     private int health;
     private int hunger;
     private int belligerence;
-    private MagicPotion magicPotion;
+    private int magicPotionLevel;
     private final PersonType personType;
     private Inventory inventory;
+
+    private int potionCountdown;
+    private boolean potionPermanent;
 
     private final int maxHealth;
     private final int maxHunger;
@@ -42,7 +46,7 @@ public abstract class Character {
      * @param health           current health points
      * @param hunger           current hunger level
      * @param belligerence     belligerence level
-     * @param magicPotion current magic potion quantity
+     * @param magicPotionLevel current magic potion quantity
      */
     public Character(String name,
                      Gender gender,
@@ -53,7 +57,7 @@ public abstract class Character {
                      int health,
                      int hunger,
                      int belligerence,
-                     MagicPotion magicPotion,
+                     int magicPotionLevel,
                      PersonType personType
     ) {
 
@@ -68,8 +72,9 @@ public abstract class Character {
         this.hunger = hunger;
         this.maxHunger = hunger;
         this.belligerence = belligerence;
-        this.magicPotion = magicPotion;
+        this.magicPotionLevel = magicPotionLevel;
         this.personType =  personType;
+        this.potionPermanent = false;
 
     }
 
@@ -94,13 +99,21 @@ public abstract class Character {
 
     /**
      * Drinks a dose of magic potion.
+     *
+     * If the character drinks 1 pot of potion the effects are permanents
+     *
+     * If the Character drinks 2 pots of potion it kills him
      */
-    public boolean drinkPotion(){
-        if (magicPotion != null) {
-            return magicPotion.drinkADose();
-        } else {
-            System.out.println(this.name + "Il n'y a pas de potion à boire");
-            return false;
+    public void drinkPotion(Pot pot){
+        if(pot.drinkADose()){
+            magicPotionLevel = magicPotionLevel + 1;
+        }
+        if (magicPotionLevel >= pot.getDosesPerPot()){
+            this.potionPermanent = true;
+        }
+        if (magicPotionLevel >= pot.getDosesPerPot()*2){
+            System.out.println(name + " est devenu une statue de granit.");
+            die();
         }
     }
 
@@ -118,9 +131,11 @@ public abstract class Character {
      * @param points
      */
     public void receiveDamage(int points){
-        this.health -= points;
-        if (this.health <= 0) {
-            die();
+        if (potionCountdown == 0) {
+            this.health -= points;
+            if (this.health <= 0) {
+                die();
+            }
         }
     }
 
@@ -129,6 +144,7 @@ public abstract class Character {
      * Implementations should update internal state to reflect death.
      */
     public void die(){
+        health = 0;
         System.out.println(this.name + " est mort.");
     }
 
@@ -142,6 +158,17 @@ public abstract class Character {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Simulate the evaporation of the potion's powers.
+     *
+     * @return
+     */
+    public void PotionEffectEvaporation() {
+        if (!this.potionPermanent && potionCountdown > 0) {
+            potionCountdown--;
+        }
     }
 
     /**
@@ -230,11 +257,8 @@ public abstract class Character {
      *
      * @return the magic potion amount
      */
-    public int getMagicPotion() {
-        if (magicPotion != null) {
-            return magicPotion.getDoses();
-        }
-        return 0;
+    public int getMagicPotionLevel() {
+        return magicPotionLevel;
     }
 
     /**
@@ -251,6 +275,28 @@ public abstract class Character {
      */
     public int getMaxHunger(){
         return maxHunger;
+    }
+
+    /**
+     * Returns the person's type (Gaul, Roman, ...).
+     */
+    public PersonType getPersonType() {
+        return personType;
+    }
+
+    /**
+     * Returns if the Potion's effect are permanent.
+     */
+    public boolean getPotionPermanent() {
+        return potionPermanent;
+    }
+
+    /**
+     * Returns the Potions's effect countdown
+     *
+     */
+    public int getPotionCountdown() {
+        return potionCountdown;
     }
 
     /**
@@ -339,16 +385,26 @@ public abstract class Character {
      *
      * @param magicPotion the new potion amount
      */
-    public void setMagicPotion(MagicPotion magicPotion) {
-        this.magicPotion = magicPotion;
+    public void setMagicPotion(int magicPotion) {
+        this.magicPotionLevel = magicPotion;
     }
 
     /**
-     * Returns the person's type (Gaul, Roman, ...).
+     * Sets the potion's permanent effects
+     *
+     * @param potionPermanent
      */
-    public PersonType getPersonType()
-    {
-        return personType;
+    public void setPotionPermanent(boolean potionPermanent) {
+        this.potionPermanent = potionPermanent;
+    }
+
+    /**
+     * Sets the potion's countdown
+     *
+     * @param potionCountdown
+     */
+    public void setPotionCountdown(int potionCountdown) {
+        this.potionCountdown = potionCountdown;
     }
 
     /**
@@ -371,7 +427,7 @@ public abstract class Character {
                 ", hunger=" + hunger +
                 ", maxHunger=" + maxHunger +
                 ", belligerence=" + belligerence +
-                ", magicPotionDose=" + magicPotion +
+                ", magicPotionLevel=" + magicPotionLevel +
                 '}';
     }
 }
