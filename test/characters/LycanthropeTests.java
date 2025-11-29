@@ -20,7 +20,7 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                null
         );
 
         Lycanthrope wolf2 = new Lycanthrope(
@@ -33,7 +33,7 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                null
         );
 
         wolf1.fight(wolf2);
@@ -53,7 +53,7 @@ public class LycanthropeTests {
                 100,
                 9,
                 6,
-                0
+                null
         );
 
         wolf.eat(4);
@@ -73,12 +73,12 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                null
         );
 
-        wolf.drinkPotion(1);
+        wolf.drinkPotion();
 
-        assertEquals(1, wolf.getMagicPotionLevel());
+        assertEquals(1, wolf.getMagicPotion());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class LycanthropeTests {
                 1,
                 5,
                 6,
-                0
+                null
         );
 
         wolf.fight(wolf);

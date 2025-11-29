@@ -19,7 +19,7 @@ public class PrefectTests {
                 100,
                 5,
                 3,
-                0
+                null
         );
 
         assertDoesNotThrow(prefect::lead);

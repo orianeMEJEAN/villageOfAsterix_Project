@@ -70,7 +70,7 @@ public class FoodServiceTest_2
                 100,
                 10,
                 0,
-                0,
+                null,
                 PersonType.gaul
         );
         FoodService service = new FoodService();
@@ -101,7 +101,7 @@ public class FoodServiceTest_2
                 100,
                 10,
                 0,
-                0,
+                null,
                 PersonType.gaul
         );
         FoodService service = new FoodService();
@@ -130,7 +130,7 @@ public class FoodServiceTest_2
                 100,
                 50,
                 0,
-                0,
+                null,
                 PersonType.gaul
         );
         FoodService service = new FoodService();

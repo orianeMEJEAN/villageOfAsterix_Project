@@ -8,15 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import food.enums.Ingredient;
 import food.FoodService;
 import food.HealthResult;
+import food.enums.HealthIssue;
 import enums.PersonType;
 
 /**
  * Suite of unit tests for the FoodService class.
  * These tests verify the behavior of meal evaluation according to different character types.
- * They ensure that the dietary rules engine works according to the defined rules.
- *
- * @author Oriane
- * @version 1.0
  */
 public class FoodServiceTest
 {
@@ -35,36 +32,40 @@ public class FoodServiceTest
                 Ingredient.wine
         );
         HealthResult res = service.evaluateMeal(PersonType.gaul, meal);
-        assertTrue(res.isHealthy(), "Le gaulois devrait être en bonne santé en mangeant sanglier, poisson passablement frais, vin");
+        assertTrue(res.isHealthy(), "Le gaulois devrait être en bonne santé en mangeant un sanglier, poisson passablement frais ou du vin");
     }
 
     /**
      * Verifies that not-fresh fish leads to poor health,
      * regardless of who consumes it.
+     *
+     * For the gaul.
      */
     @Test
-    void not_fresh_fish_is_unhealthy()
+    void not_fresh_fish_is_unhealthy_gaul()
     {
         List<Ingredient> meal = Arrays.asList(Ingredient.notFreshFish);
         HealthResult res = service.evaluateMeal(PersonType.gaul, meal);
 
         assertFalse(res.isHealthy());
-        assertTrue(res.getIssues().stream().anyMatch(s -> s.contains("poisson pas frais")));
+        assertTrue(res.getIssues().stream().anyMatch(issue -> issue == HealthIssue.BAD_FISH),"Le résultat doit contenir l'issue BAD_FISH.");
     }
 
     /**
      * Verifies that two (or more) plant-based ingredients eaten consecutively
      * are considered an unhealthy meal.
+     *
+     * For the gaul.
      */
     @Test
-    void two_vegetables_in_a_row_is_unhealthy()
+    void two_vegetables_in_a_row_is_unhealthy_gaul()
     {
         List<Ingredient> meal = Arrays.asList(Ingredient.carrots, Ingredient.strawberries);
         HealthResult res = service.evaluateMeal(PersonType.gaul, meal);
 
         assertFalse(res.isHealthy());
-
-        assertTrue(res.getIssues().stream().anyMatch(s -> s.contains("végétaux") || s.contains("végétal")));
+        assertTrue(res.getIssues().stream().anyMatch(issue -> issue == HealthIssue.CONSECUTIVE_VEGETABLES),
+                "Le résultat doit contenir l'issue CONSECUTIVE_VEGETABLES lorsque deux végétaux consécutifs sont présents.");
     }
 
     /**
@@ -83,5 +84,38 @@ public class FoodServiceTest
         HealthResult res = service.evaluateMeal(PersonType.roman, meal);
 
         assertTrue(res.isHealthy(), "Le romain devrait être en bonne santé avec ce repas.");
+    }
+
+    /**
+     * Verifies that not-fresh fish leads to poor health,
+     * regardless of who consumes it.
+     *
+     * For the roman.
+     */
+    @Test
+    void not_fresh_fish_is_unhealthy_roman()
+    {
+        List<Ingredient> meal = Arrays.asList(Ingredient.notFreshFish);
+        HealthResult res = service.evaluateMeal(PersonType.roman, meal);
+
+        assertFalse(res.isHealthy());
+        assertTrue(res.getIssues().stream().anyMatch(issue -> issue == HealthIssue.BAD_FISH),"Le résultat doit contenir l'issue BAD_FISH.");
+    }
+
+    /**
+     * Verifies that two (or more) plant-based ingredients eaten consecutively
+     * are considered an unhealthy meal.
+     *
+     * For the roman.
+     */
+    @Test
+    void two_vegetables_in_a_row_is_unhealthy_roman()
+    {
+        List<Ingredient> meal = Arrays.asList(Ingredient.beetrootJuice, Ingredient.freshFourLeafClover);
+        HealthResult res = service.evaluateMeal(PersonType.roman, meal);
+
+        assertFalse(res.isHealthy());
+        assertTrue(res.getIssues().stream().anyMatch(issue -> issue == HealthIssue.CONSECUTIVE_VEGETABLES),
+                "Le résultat doit contenir l'issue CONSECUTIVE_VEGETABLES lorsque deux végétaux consécutifs sont présents.");
     }
 }

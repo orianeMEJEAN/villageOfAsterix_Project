@@ -20,7 +20,7 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                null
         );
 
         Legionary brutusSoldier = new Legionary(
@@ -33,7 +33,7 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                null
         );
 
         caesarSoldier.fight(brutusSoldier);
@@ -53,7 +53,7 @@ public class LegionaryTests {
                 100,
                 8,
                 4,
-                0
+                null
         );
 
         soldier.eat(3);
@@ -73,12 +73,12 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                null
         );
 
-        soldier.drinkPotion(2);
+        soldier.drinkPotion();
 
-        assertEquals(2, soldier.getMagicPotionLevel());
+        assertEquals(2, soldier.getMagicPotion());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class LegionaryTests {
                 1,
                 5,
                 4,
-                0
+                null
         );
 
         soldier.fight(soldier);

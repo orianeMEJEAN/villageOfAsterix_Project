@@ -20,7 +20,7 @@ public class GaulTests {
                 100,
                 5,
                 3,
-                0,
+                null,
                 GaulType.NONE
         );
 
@@ -34,7 +34,7 @@ public class GaulTests {
                 100,
                 5,
                 3,
-                0,
+                null,
                 GaulType.NONE
         );
 
@@ -55,7 +55,7 @@ public class GaulTests {
                 100,
                 10,
                 5,
-                0,
+                null,
                 GaulType.NONE
         );
 
@@ -76,11 +76,11 @@ public class GaulTests {
                 100,
                 5,
                 5,
-                0,
+                null,
                 GaulType.NONE
         );
 
-        asterix.drinkPotion(3);
+        asterix.drinkPotion();
 
         assertEquals(3, asterix.getMagicPotion());
     }
@@ -97,7 +97,7 @@ public class GaulTests {
                 1,
                 5,
                 5,
-                0,
+                null,
                 GaulType.NONE
         );
 
