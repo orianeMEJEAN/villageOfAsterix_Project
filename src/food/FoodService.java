@@ -13,6 +13,7 @@ import characters.Character;
 import enums.PersonType;
 import food.enums.HealthIssue;
 import food.enums.Ingredient;
+import food.HealthResult;
 
 import java.util.ArrayList;
 import java.util.List;
