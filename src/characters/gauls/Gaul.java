@@ -1,10 +1,9 @@
 package characters.gauls;
 
-import characters.Character;
 import characters.Worker;
-import enums.GaulType;
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.GaulType;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 
 /**
  * Represents a Gaul character, a cultural subgroup of characters

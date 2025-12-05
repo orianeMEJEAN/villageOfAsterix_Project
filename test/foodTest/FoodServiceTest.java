@@ -19,7 +19,7 @@ import food.enums.Ingredient;
 import food.FoodService;
 import food.HealthResult;
 import food.enums.HealthIssue;
-import enums.PersonType;
+import characters.enums.PersonType;
 
 /**
  * Suite of unit tests for the FoodService class.

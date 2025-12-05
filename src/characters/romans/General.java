@@ -1,7 +1,7 @@
 package characters.romans;
 
 import characters.Leader;
-import enums.Gender;
+import characters.enums.Gender;
 
 /**
  * Handles the creation of a roman General

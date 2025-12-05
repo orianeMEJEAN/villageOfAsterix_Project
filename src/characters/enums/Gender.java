@@ -1,4 +1,4 @@
-package enums;
+package characters.enums;
 
 public enum Gender {
     MALE,

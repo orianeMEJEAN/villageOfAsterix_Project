@@ -9,7 +9,7 @@
  * @author Oriane
  * @version 1.0
  */
-package enums;
+package characters.enums;
 
 import food.enums.Ingredient;
 

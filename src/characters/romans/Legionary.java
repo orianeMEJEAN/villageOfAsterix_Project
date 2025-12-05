@@ -1,6 +1,6 @@
 package characters.romans;
 
-import enums.Gender;
+import characters.enums.Gender;
 
 /**
  * Handles the creation of a roman Legionary
