@@ -19,7 +19,7 @@ public class Prefect extends Roman implements Leader {
      * @param health            current health points
      * @param hunger            current hunger level
      * @param belligerence      belligerence level
-     * @param magicPotionLevel       current magic potion amount
+     * @param magicPotionLevel  current magic potion amount
      */
     public Prefect(String name,
                    Gender gender,

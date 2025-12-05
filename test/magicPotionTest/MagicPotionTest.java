@@ -1,254 +1,162 @@
 package magicPotionTest;
 
-import magicPotion.MagicPotion;
 import food.enums.Ingredient;
-import characters.inventory.Inventory;
+import magicPotion.MagicPotion;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test class for the MagicPotion class.
- *
- * Tests the correct behavior of the MagicPotion class.
- *
- * @author Lou
- * @version 2.0
- */
 public class MagicPotionTest {
 
-    /** Potion instance used for the tests */
-    private MagicPotion potion;
-
-    private Inventory<Ingredient> inventory;
-
     /**
-     * Initializes a new instance of MagicPotion
+     * Creates the minimal list of valid base ingredients.
      */
-    @BeforeEach
-    public void setUp() {
-        inventory = new Inventory<>();
-
-
-    // Add all base ingredients
-        inventory.addItem(Ingredient.mistletoe);
-        inventory.addItem(Ingredient.carrots);
-        inventory.addItem(Ingredient.salt);
-        inventory.addItem(Ingredient.freshFourLeafClover);
-        inventory.addItem(Ingredient.moderatelyFreshFish);
-        inventory.addItem(Ingredient.rockOil);
-        inventory.addItem(Ingredient.honey);
-        inventory.addItem(Ingredient.mead);
-        inventory.addItem(Ingredient.secretIngredient);
-
-    potion = new MagicPotion((Set<Ingredient>) inventory.getItems());
-}
-
-    // CONSTRUCTOR TESTS
-
-    /**
-     * Checks that the constructor initializes the potion with 10 doses.
-     */
-    @Test
-    public void testPotionStratsWith10Doses() {
-        assertEquals(10, potion.getDoses());
+    private List<Ingredient> createBaseIngredients() {
+        return new ArrayList<>(Arrays.asList(
+                Ingredient.mistletoe,
+                Ingredient.carrots,
+                Ingredient.salt,
+                Ingredient.freshFourLeafClover,
+                Ingredient.moderatelyFreshFish,
+                Ingredient.rockOil,
+                Ingredient.honey,
+                Ingredient.mead,
+                Ingredient.secretIngredient
+        ));
     }
 
     /**
-     * Without adding ingredients,
-     * the potion must not be nourishing.
+     * Potion with only base ingredients: should build without throwing.
      */
     @Test
-    public void testPotionNotNourishing() {
-        assertFalse(potion.isNourishing());
-    }
+    void testValidPotionWithOnlyBaseIngredients() {
+        List<Ingredient> ingredients = createBaseIngredients();
 
-    // OPTIONAL INGREDIENT TESTS
+        MagicPotion potion = new MagicPotion(ingredients);
 
-    /**
-     * Checks that adding lobster makes the potion nourishing.
-     */
-    @Test
-    public void testAddLobster() {
-        potion.addLobster();
-        assertTrue(potion.isNourishing());
-    }
-
-    /**
-     * Checks that adding strawberries makes the potion nourishing.
-     */
-    @Test
-    public void testAddStrawberries() {
-        potion.addStrawberries();
-
-        assertTrue(potion.isNourishing());
+        assertNotNull(potion);
+        assertFalse(potion.isNourishing(), "La potion ne devrait pas être nourrissante sans homard/fraises/jus de betterave");
+        assertFalse(potion.isWithLobster());
+        assertFalse(potion.isWithStrawberries());
+        assertFalse(potion.isWithBeetJuice());
+        assertFalse(potion.isWithUnicornMilk());
+        assertFalse(potion.isWithIdefixsHair());
     }
 
     /**
-     * Checks that replacing with beet juice makes the potion nourishing.
+     * Missing a base ingredient: constructor should throw IllegalArgumentException.
      */
     @Test
-    public void testReplaceByBeetJuice() {
-        potion.replaceByBeetJuice();
+    void testMissingBaseIngredientThrowsException() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        // Remove a base ingredient to invalidate the potion
+        ingredients.remove(Ingredient.salt);
 
-        assertTrue(potion.isNourishing());
+        assertThrows(IllegalArgumentException.class,
+                () -> new MagicPotion(ingredients),
+                "La création d'une potion sans tous les ingrédients de base devrait lever une IllegalArgumentException");
     }
 
     /**
-     * Checks that adding unicorn milk does not cause any error.
+     * Too many special ingredients (2 instead of 1 max): should throw IllegalArgumentException.
      */
     @Test
-    public void testAddUnicornMilk() {
-        assertDoesNotThrow(() -> potion.addUnicornMilk());
+    void testTooManySpecialIngredientsThrowsException() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        ingredients.add(Ingredient.twoHeadedUnicornMilk);
+        ingredients.add(Ingredient.idefixHair);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> new MagicPotion(ingredients),
+                "La potion ne doit pas accepter plus de specialIngredientsThreshold ingrédients spéciaux");
     }
 
     /**
-     * Checks that adding Idefix's hair does not cause any error.
+     * Potion is nourishing if at least one nourishing ingredient is present.
      */
     @Test
-    public void testaddIdefixsHair() {
-        assertDoesNotThrow(() -> potion.addIdefixsHair());
+    void testPotionIsNourishingWithLobster() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        ingredients.add(Ingredient.lobster);
+
+        MagicPotion potion = new MagicPotion(ingredients);
+
+        assertTrue(potion.isNourishing(), "La présence de homard doit rendre la potion nourrissante");
+        assertTrue(potion.isWithLobster());
+        assertFalse(potion.isWithStrawberries());
+        assertFalse(potion.isWithBeetJuice());
     }
 
-    // DRINK ONE DOSE TESTS
-
-    /**
-     * Checks that drinking one dose decreases the stock by 1.
-     */
     @Test
-    public void testdrinkADose() {
-        potion.drinkADose();
+    void testPotionIsNourishingWithStrawberriesAndBeetJuice() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        ingredients.add(Ingredient.strawberries);
+        ingredients.add(Ingredient.beetrootJuice);
 
-        assertEquals(9, potion.getDoses());
-    }
+        MagicPotion potion = new MagicPotion(ingredients);
 
-    /**
-     * Checks that drinkADose() returns true when doses are available.
-     */
-    @Test
-    public void testDrinkADoseReturnsTrue() {
-        boolean resultat = potion.drinkADose();
-
-        assertTrue(resultat);
-    }
-
-    /**
-     * Checks that drinkADose() returns false when the pot is empty.
-     */
-    @Test
-    public void testDrinkADosereturnsFalse() {
-        for (int i = 0; i < 10; i++) {
-            potion.drinkADose();
-        }
-
-        boolean resultat = potion.drinkADose();
-        assertFalse(resultat);
-    }
-
-    // DRINK ONE POT TESTS
-
-    /**
-     * Checks that drinking one pot uses 10 doses.
-     */
-    @Test
-    public void testDrinkAPot() {
-        potion.drinkAPot();
-        assertEquals(0, potion.getDoses());
+        assertTrue(potion.isNourishing(), "La présence de fraises ou de jus de betterave doit rendre la potion nourrissante");
+        assertFalse(potion.isWithLobster());
+        assertTrue(potion.isWithStrawberries());
+        assertTrue(potion.isWithBeetJuice());
     }
 
     /**
-     * Checks that drinkAPot() returns true when there are enough doses.
+     * Verifies that special ingredient flags are correctly initialized.
      */
     @Test
-    public void testDrinkAPotReturnsTrue() {
-        boolean resultat = potion.drinkAPot();
-        assertTrue(resultat);
-    }
+    void testSpecialIngredientsFlagsInitialization() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        ingredients.add(Ingredient.twoHeadedUnicornMilk);
+        // Only one special ingredient, below threshold -> no exception
+        MagicPotion potion = new MagicPotion(ingredients);
 
-    // DRINK TWO POTS TESTS
-
-    /**
-     * Checks that drinkTwoPots() returns false without enough doses.
-     */
-    @Test
-    public void testDrinkTwoPotsReturnsFalse() {
-        boolean resultat = potion.drinkTwoPots();
-        assertFalse(resultat);
+        assertTrue(potion.isWithUnicornMilk());
+        assertFalse(potion.isWithIdefixsHair());
     }
 
     /**
-     * Checks that drinkTwoPots() returns true when there are enough doses.
+     * Verifies that setters correctly modify flags.
      */
     @Test
-    public void testDrinkTwoPotsReturnsTrue() {
-        potion.addPot();
-        boolean resultat = potion.drinkTwoPots();
-        assertTrue(resultat);
+    void testSettersModifyFlags() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        MagicPotion potion = new MagicPotion(ingredients);
+
+        assertFalse(potion.isWithLobster());
+        potion.setWithLobster(true);
+        assertTrue(potion.isWithLobster());
+
+        assertFalse(potion.isWithStrawberries());
+        potion.setWithStrawberries(true);
+        assertTrue(potion.isWithStrawberries());
+
+        assertFalse(potion.isWithBeetJuice());
+        potion.setWithBeetJuice(true);
+        assertTrue(potion.isWithBeetJuice());
+
+        assertFalse(potion.isWithUnicornMilk());
+        potion.setWithUnicornMilk(true);
+        assertTrue(potion.isWithUnicornMilk());
+
+        assertFalse(potion.isWithIdefixsHair());
+        potion.setWithIdefixsHair(true);
+        assertTrue(potion.isWithIdefixsHair());
     }
 
     /**
-     * Checks that drinking two pots consumes 20 doses.
+     * Verifies that the special ingredient threshold matches the internal constant.
      */
     @Test
-    public void testDrinkTwoPots() {
-        potion.addPot();
-        potion.drinkTwoPots();
-        assertEquals(0, potion.getDoses());
-    }
+    void testSpecialIngredientsThresholdValue() {
+        List<Ingredient> ingredients = createBaseIngredients();
+        MagicPotion potion = new MagicPotion(ingredients);
 
-    // FILL POT TESTS
-
-    /**
-     * Checks that fillPot() restores 10 doses.
-     */
-    @Test
-    public void testFillPot() {
-        potion.drinkAPot();
-        potion.fillPot();
-
-        assertEquals(10, potion.getDoses());
-    }
-
-    // PRINT RECIPE METHOD TESTS
-
-    /**
-     * Checks that printRecipe() does not cause any error.
-     */
-    @Test
-    public void testPrintRecipe() {
-        assertDoesNotThrow(() -> potion.printRecipe());
-    }
-
-    /**
-     * Checks that printRecipe() works with added ingredients.
-     */
-    @Test
-    public void testPrintRecipeWithAddedIngredients() {
-        potion.addLobster();
-        potion.addUnicornMilk();
-        assertDoesNotThrow(() -> potion.printRecipe());
-    }
-
-    /**
-     * Normal usage scenario.
-     * Ensures that all features work together properly.
-     */
-    @Test
-    public void normaleUseTest() {
-        potion.addStrawberries();
-        assertTrue(potion.isNourishing());
-
-        potion.drinkADose();
-        potion.drinkADose();
-        assertEquals(8, potion.getDoses());
-
-        potion.fillPot();
-        assertEquals(10, potion.getDoses());
-
-        potion.drinkAPot();
-        assertEquals(0, potion.getDoses());
+        assertEquals(1, potion.getSpecialIngredientsThreshold(),
+                "Le seuil d'ingrédients spéciaux devrait être de 1");
     }
 }

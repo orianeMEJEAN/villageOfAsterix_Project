@@ -5,11 +5,15 @@ import characters.Leader;
 import characters.Worker;
 import enums.GaulType;
 import enums.Gender;
+import food.enums.Ingredient;
+import magicPotion.Pot;
 
 /**
  * Handles the creation of a Druid
  */
 public class Druid extends Gaul implements Leader {
+
+    private Pot pot;
 
     /**
      * Creates a new Druid with the specified base attributes.
@@ -38,6 +42,7 @@ public class Druid extends Gaul implements Leader {
     ) {
         super(name, gender, height, age, strength, endurance, health,
                 hunger, belligerence, magicPotionLevel, GaulType.DRUID);
+        this.pot = new Pot();
     }
 
     /**
@@ -53,16 +58,30 @@ public class Druid extends Gaul implements Leader {
     }
 
     /**
-     * Makes the Druid make a poition pot
-     * TODO
-     * Implémenter une classe marmite afin d'avoir une marmite avec x dose de potion magique.
+     * Attempts to cook a magic potion using the given ingredient.
+     * The ingredient must be present in the druid's inventory and allowed
+     * by the pot whitelist. If valid, the ingredient is added to the pot.
+     * Once all ingredients are added, the pot attempts to brew the potion.
+     *
+     * @param ingredient the ingredient to use for brewing
+     * @throws IllegalArgumentException if the ingredient is not in the inventory
      */
-    public void makePotion()
+    public void makePotion(Ingredient ingredient)
     {
-        System.out.println("Making Potion...");
+        if (!getInventory().contains(ingredient)) {
+            throw new IllegalArgumentException("L'ingrédient " + ingredient + " n'est pas dans l'inventaire !");
+        }
 
+        if (!pot.canAccept(ingredient)) {
+            System.out.println("La marmite refuse cet ingrédient : " + ingredient);
+            return;
+        }
 
+        pot.addIngredient(ingredient);
 
-        System.out.println("Potion Made !");
+        getInventory().removeItem(ingredient);
+
+        pot.brewPotion();
     }
+
 }

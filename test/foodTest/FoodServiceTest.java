@@ -8,7 +8,7 @@
  * @version 2.0
  */
 
-package FoodTest;
+package foodTest;
 
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;

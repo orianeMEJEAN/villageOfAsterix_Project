@@ -155,4 +155,105 @@ public class MagicPotion {
             if (withIdefixsHair) System.out.println("  - Poils d'Idéfix");
         }
     }
+
+    /**
+     * Indicates whether the potion contains lobster.
+     *
+     * @return {@code true} if lobster is included, {@code false} otherwise
+     */
+    public boolean isWithLobster() {
+        return withLobster;
+    }
+
+    /**
+     * Sets whether the potion contains lobster.
+     *
+     * @param withLobster {@code true} to include lobster, {@code false} otherwise
+     */
+    public void setWithLobster(boolean withLobster) {
+        this.withLobster = withLobster;
+    }
+
+    /**
+     * Indicates whether the potion contains strawberries.
+     *
+     * @return {@code true} if strawberries are included, {@code false} otherwise
+     */
+    public boolean isWithStrawberries() {
+        return withStrawberries;
+    }
+
+    /**
+     * Sets whether the potion contains strawberries.
+     *
+     * @param withStrawberries {@code true} to include strawberries, {@code false} otherwise
+     */
+    public void setWithStrawberries(boolean withStrawberries) {
+        this.withStrawberries = withStrawberries;
+    }
+
+    /**
+     * Indicates whether the potion contains beet juice.
+     *
+     * @return {@code true} if beet juice is included, {@code false} otherwise
+     */
+    public boolean isWithBeetJuice() {
+        return withBeetJuice;
+    }
+
+    /**
+     * Sets whether the potion contains beet juice.
+     *
+     * @param withBeetJuice {@code true} to include beet juice, {@code false} otherwise
+     */
+    public void setWithBeetJuice(boolean withBeetJuice) {
+        this.withBeetJuice = withBeetJuice;
+    }
+
+    /**
+     * Indicates whether the potion contains unicorn milk.
+     *
+     * @return {@code true} if unicorn milk is included, {@code false} otherwise
+     */
+    public boolean isWithUnicornMilk() {
+        return withUnicornMilk;
+    }
+
+    /**
+     * Sets whether the potion contains unicorn milk.
+     *
+     * @param withUnicornMilk {@code true} to include unicorn milk, {@code false} otherwise
+     */
+    public void setWithUnicornMilk(boolean withUnicornMilk) {
+        this.withUnicornMilk = withUnicornMilk;
+    }
+
+    /**
+     * Indicates whether the potion contains Idefix's hair.
+     *
+     * @return {@code true} if Idefix's hair is included, {@code false} otherwise
+     */
+    public boolean isWithIdefixsHair() {
+        return withIdefixsHair;
+    }
+
+    /**
+     * Sets whether the potion contains Idefix's hair.
+     *
+     * @param withIdefixsHair {@code true} to include Idefix's hair, {@code false} otherwise
+     */
+    public void setWithIdefixsHair(boolean withIdefixsHair) {
+        this.withIdefixsHair = withIdefixsHair;
+    }
+
+    /**
+     * Returns the required number of special ingredients
+     * for the potion to be considered "special".
+     *
+     * @return the special ingredient threshold
+     */
+    public int getSpecialIngredientsThreshold() {
+        return specialIngredientsThreshold;
+    }
+
 }

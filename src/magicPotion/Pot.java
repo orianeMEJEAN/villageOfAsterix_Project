@@ -148,7 +148,9 @@ public class Pot
      */
     public void addDose(int dose)
     {
-        this.nbDoses += dose;
+        if (dose > 0){
+            this.nbDoses += dose;
+        }
     }
 
     /**

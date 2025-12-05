@@ -1,5 +1,7 @@
 package characters.inventory;
 
+import food.enums.Ingredient;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,7 @@ public class Inventory<T> {
     private List<T> items = new ArrayList<>();
 
     /**
-     * Creates an inventory with the given maximum capacity.
-     *
-     * @param capacity the maximum number of items the inventory can hold
+     * Creates an inventory.
      */
     public Inventory() {}
 
@@ -53,5 +53,27 @@ public class Inventory<T> {
      */
     public void setItems(List<T> items) {
         this.items = items;
+    }
+
+    /**
+     * Checks if the specified ingredient is present in the inventory.
+     *
+     * @param ingredient the ingredient to search for
+     * @return {@code true} if the ingredient is found in the inventory, {@code false} otherwise
+     */
+    public boolean contains(Ingredient ingredient) {
+        for (T item : items) {
+            if (item.equals(ingredient)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Clear all the Inventory's content
+     */
+    public void clear() {
+        items.clear();
     }
 }

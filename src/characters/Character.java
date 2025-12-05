@@ -25,14 +25,17 @@ public abstract class Character {
     private int hunger;
     private int belligerence;
     private int magicPotionLevel;
-    private final PersonType personType;
+    private PersonType personType;
     private Inventory inventory;
+    private PersonType originalType;
 
     private int potionCountdown;
     private boolean potionPermanent;
 
     private final int maxHealth;
     private final int maxHunger;
+
+    private final static int POTION_COUNTDOWN_VALUE = 3;
 
     /**
      * Creates a new character with all base attributes.
@@ -74,6 +77,7 @@ public abstract class Character {
         this.belligerence = belligerence;
         this.magicPotionLevel = magicPotionLevel;
         this.personType =  personType;
+        this.originalType = personType;
         this.potionPermanent = false;
 
     }
@@ -107,13 +111,30 @@ public abstract class Character {
     public void drinkPotion(Pot pot){
         if(pot.drinkADose()){
             magicPotionLevel = magicPotionLevel + 1;
-        }
-        if (magicPotionLevel >= pot.getDosesPerPot()){
-            this.potionPermanent = true;
-        }
-        if (magicPotionLevel >= pot.getDosesPerPot()*2){
-            System.out.println(name + " est devenu une statue de granit.");
-            die();
+            potionCountdown = POTION_COUNTDOWN_VALUE;
+
+            if (magicPotionLevel >= pot.getDosesPerPot()){
+                this.potionPermanent = true;
+            }
+
+            if (magicPotionLevel >= pot.getDosesPerPot()*2){
+                System.out.println(name + " est devenu une statue de granit.");
+                die();
+            }
+
+            if (pot.getMagicPotion().isNourishing()){
+                eat(2);
+            }
+
+            if (pot.getMagicPotion().isWithIdefixsHair()){
+                personType = PersonType.fantasy;
+            }
+
+            if (pot.getMagicPotion().isWithUnicornMilk()){
+                // TODO Clone
+            }
+        } else {
+            System.out.println("Il n'y a plus de potion magique!");
         }
     }
 
@@ -168,6 +189,10 @@ public abstract class Character {
     public void PotionEffectEvaporation() {
         if (!this.potionPermanent && potionCountdown > 0) {
             potionCountdown--;
+        }
+
+        if (potionCountdown == 0) {
+            personType = originalType;
         }
     }
 
@@ -300,6 +325,15 @@ public abstract class Character {
     }
 
     /**
+     * Returns the inventory
+     *
+     * @return inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    /**
      * Sets the character's name.
      *
      * @param name the new name
@@ -405,6 +439,21 @@ public abstract class Character {
      */
     public void setPotionCountdown(int potionCountdown) {
         this.potionCountdown = potionCountdown;
+    }
+
+    /**
+     * Sets the Character's type to another one
+     */
+    public void setPersonType(PersonType personType) {
+        this.personType = personType;
+    }
+
+    /**
+     * Sets the Character's inventory
+     */
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     /**

@@ -30,7 +30,7 @@ public class FoodServiceTest_2
      *
      * Note: Character's constructor signature used here matches:
      * (String name, Gender gender, int height, int age, int strength, int endurance,
-     * int health, int hunger, int belligerence, MagicPotion magicPotion, PersonType personType)
+     * int health, int hunger, int belligerence, int magicPotionLevel, PersonType personType)
      */
     static class TestCharacter extends Character
     {
@@ -44,12 +44,12 @@ public class FoodServiceTest_2
                 int health,
                 int hunger,
                 int belligerence,
-                MagicPotion magicPotion,
+                int magicPotionLevel,
                 PersonType personType)
                 {
                     super(name, gender, height,
                           age, strength, endurance, health,
-                          hunger, belligerence, magicPotion, personType);
+                          hunger, belligerence, magicPotionLevel, personType);
                 }
     }
 
@@ -70,7 +70,7 @@ public class FoodServiceTest_2
                 100,
                 10,
                 0,
-                null,
+                0,
                 PersonType.gaul
         );
         FoodService service = new FoodService();
@@ -101,7 +101,7 @@ public class FoodServiceTest_2
                 100,
                 10,
                 0,
-                null,
+                0,
                 PersonType.gaul
         );
         FoodService service = new FoodService();
@@ -130,7 +130,7 @@ public class FoodServiceTest_2
                 100,
                 50,
                 0,
-                null,
+                0,
                 PersonType.gaul
         );
         FoodService service = new FoodService();
