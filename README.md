@@ -1,4 +1,4 @@
-https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.amazon.fr%2FAst%25C3%25A9rix-Ob%25C3%25A9lix-compagnie-Ren%25C3%25A9-Goscinny%2Fdp%2F2012101550&ved=0CBYQjRxqFwoTCICXgKjJppEDFQAAAAAdAAAAABAI&opi=89978449
+![50325d77-dd94-4aba-9d2c-7b00e988e964 __CR0,0,970,300_PT0_SX970_V1___](https://github.com/user-attachments/assets/b77eb92b-f66b-42ca-af05-a34835993fa0)
 
 ## Asterix and Obelix’s village in Java / Asterix & Obelix village en Java
 
