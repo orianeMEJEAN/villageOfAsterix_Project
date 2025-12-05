@@ -2,6 +2,7 @@ package characters.romans;
 
 import characters.Leader;
 import enums.Gender;
+import enums.PersonType;
 
 /**
  * Handles the creation of a roman prefect
@@ -33,7 +34,8 @@ public class Prefect extends Roman implements Leader {
                    int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance,
-                health,hunger, belligerence, magicPotionLevel);
+                health,hunger, belligerence, magicPotionLevel,
+                PersonType.roman);
     }
 
     /**

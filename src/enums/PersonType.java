@@ -20,6 +20,7 @@ public enum PersonType
 {
     gaul,
     fantasy,
+    roman_fighter,
     roman;
 
     /**
