@@ -93,6 +93,34 @@ public abstract class Place {
     }
 
     /**
+     * Returns the list of characters in this place.
+     */
+    public List<Character> getCharacters() {
+        return characters;
+    }
+
+    /**
+     * Returns the list of foods available in this place.
+     */
+    public List<Ingredient> getFoods() {
+        return foods;
+    }
+
+    /**
+     * Returns the name of this place.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the type of this place.
+     */
+    public PlacesType getPlaceType() {
+        return placeType;
+    }
+
+    /**
      * Adds a character to the place.
      *
      * @param character the character to add
