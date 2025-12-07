@@ -1,4 +1,6 @@
 package places;
 
-public class TheatherOfWar {
+public class TheatherOfWar
+{
+
 }

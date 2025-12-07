@@ -1,6 +1,8 @@
 package characters.romans;
 
 import characters.enums.Gender;
+import characters.enums.PersonType;
+
 
 /**
  * Handles the creation of a roman Legionary
@@ -32,6 +34,7 @@ public class Legionary extends Roman {
                    int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance,
-                health,hunger, belligerence, magicPotionLevel);
+                health,hunger, belligerence, magicPotionLevel,
+                PersonType.roman_fighter);
     }
 }

@@ -1,7 +1,7 @@
 package places;
 
 import characters.ClanChief;
-import enums.PersonType;
+import characters.enums.PersonType;
 import food.enums.Ingredient;
 import places.enums.PlacesType;
 import characters.Character;

@@ -1,7 +1,7 @@
 package characters;
 
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 import food.enums.Ingredient;
 import magicPotion.Pot;
 import places.Place;
