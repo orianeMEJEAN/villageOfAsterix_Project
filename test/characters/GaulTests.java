@@ -1,8 +1,8 @@
 package characters;
 
 import characters.gauls.Gaul;
-import enums.GaulType;
-import enums.Gender;
+import characters.enums.GaulType;
+import characters.enums.Gender;
 import food.enums.Ingredient;
 import magicPotion.Pot;
 import org.junit.jupiter.api.Test;

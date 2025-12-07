@@ -1,6 +1,6 @@
 package characters.fantasy;
 
-import enums.Gender;
+import characters.enums.Gender;
 
 public class Lycanthrope extends FantasyCreature {
     /**

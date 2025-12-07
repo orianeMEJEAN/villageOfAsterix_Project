@@ -1,7 +1,7 @@
 package characters;
 
 import characters.romans.Legionary;
-import enums.Gender;
+import characters.enums.Gender;
 import food.enums.Ingredient;
 import magicPotion.Pot;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
 package characters.fantasy;
 
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 
 /**
  * This class helps to create a new Fantasy Creature

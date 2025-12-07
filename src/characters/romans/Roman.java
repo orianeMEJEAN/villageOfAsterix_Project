@@ -1,7 +1,7 @@
 package characters.romans;
 
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 
 public class Roman extends characters.Character {
 

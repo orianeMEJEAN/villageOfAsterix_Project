@@ -10,7 +10,7 @@
 package food;
 
 import characters.Character;
-import enums.PersonType;
+import characters.enums.PersonType;
 import food.enums.HealthIssue;
 import food.enums.Ingredient;
 import food.HealthResult;

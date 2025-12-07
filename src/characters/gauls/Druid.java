@@ -2,9 +2,8 @@ package characters.gauls;
 
 import characters.Character;
 import characters.Leader;
-import characters.Worker;
-import enums.GaulType;
-import enums.Gender;
+import characters.enums.GaulType;
+import characters.enums.Gender;
 import food.enums.Ingredient;
 import magicPotion.Pot;
 

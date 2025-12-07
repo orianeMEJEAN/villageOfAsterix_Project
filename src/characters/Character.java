@@ -1,9 +1,8 @@
 package characters;
 
 import characters.inventory.Inventory;
-import enums.Gender;
-import enums.PersonType;
-import magicPotion.MagicPotion;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 import magicPotion.Pot;
 
 /**

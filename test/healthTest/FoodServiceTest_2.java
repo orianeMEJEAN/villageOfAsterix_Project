@@ -1,12 +1,11 @@
 package healthTest;
 
 import characters.Character;
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.Gender;
+import characters.enums.PersonType;
 import food.FoodService;
 import food.HealthResult;
 import food.enums.Ingredient;
-import magicPotion.MagicPotion;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

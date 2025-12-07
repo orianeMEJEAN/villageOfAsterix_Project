@@ -1,8 +1,7 @@
 package characters.romans;
 
 import characters.Leader;
-import enums.Gender;
-import enums.PersonType;
+import characters.enums.Gender;
 
 /**
  * Handles the creation of a roman General
@@ -34,8 +33,7 @@ public class General extends Roman implements Leader {
                    int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance,
-                health,hunger, belligerence, magicPotionLevel,
-                PersonType.roman);
+                health,hunger, belligerence, magicPotionLevel);
     }
 
     /**
