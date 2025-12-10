@@ -1,5 +1,6 @@
 package characters;
 
+import characters.enums.PersonType;
 import characters.fantasy.Lycanthrope;
 import characters.enums.Gender;
 import food.enums.Ingredient;
@@ -53,7 +54,8 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                0,
+                PersonType.fantasy
         );
 
         Lycanthrope wolf2 = new Lycanthrope(
@@ -66,7 +68,8 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                0,
+                PersonType.fantasy
         );
 
         int healthBefore = wolf2.getHealth();
@@ -92,7 +95,8 @@ public class LycanthropeTests {
                 100,
                 9,
                 6,
-                0
+                0,
+                PersonType.fantasy
         );
 
         wolf.setHunger(4);
@@ -119,7 +123,8 @@ public class LycanthropeTests {
                 100,
                 5,
                 6,
-                0
+                0,
+                PersonType.fantasy
         );
 
         Pot pot = createBasicFullPot();
@@ -147,7 +152,8 @@ public class LycanthropeTests {
                 1,
                 5,
                 6,
-                0
+                0,
+                PersonType.fantasy
         );
 
         wolf.fight(wolf);

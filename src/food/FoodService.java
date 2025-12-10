@@ -14,6 +14,7 @@ import characters.enums.PersonType;
 import food.enums.HealthIssue;
 import food.enums.Ingredient;
 import food.HealthResult;
+import java.util.Random;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,17 @@ public class FoodService
     private static final int DAMAGE_CONSECUTIVE_VEGETABLES = 5;
     private static final int SATIETY_PER_INGREDIENT_HEALTHY = 5;
     private static final int SATIETY_PER_INGREDIENT_UNHEALTHY = 2;
+
+
+    /**
+     * Returns a random ingredient
+     * @return
+     */
+    public static Ingredient random() {
+        Ingredient[] ingredients = Ingredient.values();
+        Random rand = new Random();
+        return ingredients[rand.nextInt(ingredients.length)];
+    }
 
     /**
      * Checks whether an ingredient is allowed for a given PersonType.

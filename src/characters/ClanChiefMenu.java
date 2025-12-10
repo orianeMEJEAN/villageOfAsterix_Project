@@ -1,5 +1,6 @@
 package characters;
 
+import characters.enums.GaulType;
 import characters.enums.Gender;
 import characters.enums.PersonType;
 import food.enums.Ingredient;
@@ -266,10 +267,10 @@ public class ClanChiefMenu {
 
                 if (gaulChoice == 1) {
                     newCharacter = new Druid(name, gender, height, age, strength,
-                            endurance, health, hunger, belligerence, 0, type);
+                            endurance, health, hunger, belligerence, 0, GaulType.DRUID);
                 } else {
                     newCharacter = new Gaul(name, gender, height, age, strength,
-                            endurance, health, hunger, belligerence, 0, type);
+                            endurance, health, hunger, belligerence, 0, GaulType.DRUID);
                 }
                 break;
 
@@ -286,19 +287,19 @@ public class ClanChiefMenu {
                 switch (romanChoice) {
                     case 1:
                         newCharacter = new General(name, gender, height, age, strength,
-                                endurance, health, hunger, belligerence, 0, type);
+                                endurance, health, hunger, belligerence, 0);
                         break;
                     case 2:
                         newCharacter = new Legionary(name, gender, height, age, strength,
-                                endurance, health, hunger, belligerence, 0, type);
+                                endurance, health, hunger, belligerence, 0);
                         break;
                     case 3:
                         newCharacter = new Prefect(name, gender, height, age, strength,
-                                endurance, health, hunger, belligerence, 0, type);
+                                endurance, health, hunger, belligerence, 0);
                         break;
                     default:
                         newCharacter = new Roman(name, gender, height, age, strength,
-                                endurance, health, hunger, belligerence, 0, type);
+                                endurance, health, hunger, belligerence, 0, PersonType.roman);
                         break;
                 }
                 break;

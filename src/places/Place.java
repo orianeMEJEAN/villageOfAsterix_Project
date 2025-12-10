@@ -9,7 +9,7 @@ import characters.Character;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Place {
+public class Place {
 
     private String name;
     private double area;

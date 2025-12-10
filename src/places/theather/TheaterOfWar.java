@@ -2,21 +2,25 @@ package places.theather;
 
 import characters.Character;
 import characters.ClanChief;
-import characters.enums.Gender;
 import characters.enums.PersonType;
 import places.Place;
 import places.enums.PlacesType;
 import food.enums.Ingredient;
 import food.FoodService;
-import characters.ClanChief;
 import characters.ClanChiefMenu;
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TheatherOfWar
+/**
+ * Represents a theater of war where battles occur between different factions*
+ * This class manages simulation including battles, food management, clan chief actions...etc
+ *
+ * @author Oriane
+ * @version 2.0
+ */
+public class TheaterOfWar
 {
     private String name;
     private int maxPlaces;
@@ -24,14 +28,26 @@ public class TheatherOfWar
     private List<ClanChief> chiefs;
     private Random random;
 
-    public TheatherOfWar(String name,  int maxPlaces, List<Place> places, List<ClanChief> chiefs)
+    /**
+     * Constructor for the theater of war.
+     *
+     * @param name The name of the theater
+     * @param maxPlaces The maximum number of places allowed
+     * @param places The list of places in the theater
+     * @param chiefs The list of clan chiefs
+     */
+    public TheaterOfWar(String name, int maxPlaces, List<Place> places, List<ClanChief> chiefs)
     {
         this.name = name;
         this.maxPlaces = maxPlaces;
         this.places = places;
         this.chiefs = chiefs;
+        this.random = new Random();
     }
 
+    /**
+     * Displays the list of all places in the theater
+     */
     public void showPlace()
     {
         System.out.println("== Liste des Lieux ==");
@@ -40,6 +56,10 @@ public class TheatherOfWar
             place.display();
         }
     }
+
+    /**
+     * Calculates and displays the total number of characters present in all places
+     */
     public void showNumberOfCharacters()
     {
         int total = 0;
@@ -50,6 +70,10 @@ public class TheatherOfWar
         System.out.println("Le nombre total de personnage est de " + total);
     }
 
+    /**
+     * Displays all characters present in each place of the theater
+     * For each place, lists the name and type of each character
+     */
     public void showCharactersAllPlaces()
     {
         for (Place place : places)
@@ -63,6 +87,13 @@ public class TheatherOfWar
         }
     }
 
+    /**
+     * Manages battles on battlefields.
+     *   Identifies all Gallic and Roman characters present
+     *   Romans randomly attack Romans (deals 10 damage)
+     *   Gauls randomly attack Gauls (deals 10 damage)
+     *   Characters with 0 or fewer health points are removed
+     */
     private void fight()
     {
         for (Place place : places)
@@ -109,6 +140,12 @@ public class TheatherOfWar
         }
     }
 
+    /**
+     * Changes the state of characters randomly during each simulation cycle
+     *   35% chance that a character's hunger increases by 5
+     *   20% chance that a character's potion effect evaporates
+     * Applies to all characters in all places.
+     */
     private void changeStateCharacters()
     {
         for (Place place : places)
@@ -122,12 +159,18 @@ public class TheatherOfWar
 
                 if (random.nextDouble() < 0.20)
                 {
-                    // TODO doit diminuer l'effet de la potion sur le personnage
+                    character.potionEffectEvaporation();
                 }
             }
         }
     }
 
+    /**
+     * Randomly spawns food ingredients in places except of the battlefields
+     * For each non-battlefield place, there is a 50% chance that a random
+     * ingredient will appear
+     * Displays a message when food appears
+     */
     private void spawnFood()
     {
         for (Place place : places)
@@ -145,6 +188,10 @@ public class TheatherOfWar
         }
     }
 
+    /**
+     * Ages food ingredients by changing their state from fresh to not fresh
+     * Displays a message when an ingredient becomes not fresh
+     */
     private void deadFood()
     {
         for (Place place : places)
@@ -161,6 +208,10 @@ public class TheatherOfWar
         }
     }
 
+    /**
+     * Gives each clan chief their turn to perform actions
+     * Creates a menu for each chief and starts their action phase
+     */
     private void chiefsClanMoment()
     {
         for (ClanChief chief : chiefs)
@@ -171,6 +222,16 @@ public class TheatherOfWar
         }
     }
 
+    /**
+     * Starts the main simulation loop of the theater of war
+     * The simulation runs indefinitely and executes the following actions in order:
+     *   Fights on battlefields
+     *   Changes character states (hunger, potion effects)
+     *   Spawns new food
+     *   Ages existing food
+     *   Gives clan chiefs their turn
+     * Each cycle is separated by a 1.5 second pause
+     */
     public void startSimulation()
     {
         System.out.println("== Début de la simulation : " + name + " ==");

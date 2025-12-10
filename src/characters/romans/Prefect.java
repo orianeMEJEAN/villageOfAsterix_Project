@@ -32,8 +32,7 @@ public class Prefect extends Roman implements Leader {
                    int health,
                    int hunger,
                    int belligerence,
-                   int magicPotionLevel,
-                   PersonType personType
+                   int magicPotionLevel
     ) {
         super(name, gender, height, age, strength, endurance,
                 health,hunger, belligerence, magicPotionLevel,

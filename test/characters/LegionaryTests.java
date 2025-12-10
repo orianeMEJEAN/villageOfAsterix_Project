@@ -1,5 +1,6 @@
 package characters;
 
+import characters.enums.PersonType;
 import characters.romans.Legionary;
 import characters.enums.Gender;
 import food.enums.Ingredient;
@@ -53,7 +54,8 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                0,
+                PersonType.roman
         );
 
         Legionary brutusSoldier = new Legionary(
@@ -66,7 +68,8 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                0,
+                PersonType.roman
         );
 
         int healthBefore = brutusSoldier.getHealth();
@@ -92,7 +95,8 @@ public class LegionaryTests {
                 100,
                 8,
                 4,
-                0
+                0,
+                PersonType.roman
         );
 
         soldier.setHunger(5);
@@ -119,7 +123,8 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0
+                0,
+                PersonType.roman
         );
 
         Pot pot = createBasicFullPot();
@@ -147,7 +152,8 @@ public class LegionaryTests {
                 1,
                 5,
                 4,
-                0
+                0,
+                PersonType.roman
         );
 
         soldier.fight(soldier);

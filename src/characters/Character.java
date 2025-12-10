@@ -185,7 +185,7 @@ public abstract class Character {
      *
      * @return
      */
-    public void PotionEffectEvaporation() {
+    public void potionEffectEvaporation() {
         if (!this.potionPermanent && potionCountdown > 0) {
             potionCountdown--;
         }
