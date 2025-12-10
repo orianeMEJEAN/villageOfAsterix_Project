@@ -17,7 +17,7 @@ import java.util.List;
  * ingredients such as two-headed unicorn milk or Idéfix's hair.
  *
  * @author Lou
- * @subauthor Oriane &amp; Maxence
+ * @subauthor: Oriane &amp; Maxence
  * @version 4.0
  */
 public class MagicPotion {

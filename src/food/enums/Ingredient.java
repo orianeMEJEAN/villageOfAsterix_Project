@@ -48,9 +48,16 @@ public enum Ingredient
         other
     }
 
+    public enum State
+    {
+        fresh,
+        notFresh
+    }
+
     private final String displayName;
     private final Category category;
     private final boolean isVegetable;
+    private State state;
 
     /**
      * Builds an ingredient.
@@ -87,4 +94,14 @@ public enum Ingredient
      * @return false otherwise
      */
     public boolean isVegetable() { return isVegetable; }
+
+    public State getState()
+    {
+        return state;
+    }
+
+    public void setState(State state)
+    {
+        this.state = state;
+    }
 }

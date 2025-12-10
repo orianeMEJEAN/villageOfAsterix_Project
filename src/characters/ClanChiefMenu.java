@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import characters.fantasy.FantasyCreature;
 import characters.fantasy.Lycanthrope;
 import characters.gauls.Druid;
 import characters.gauls.Gaul;
@@ -17,6 +16,7 @@ import characters.romans.General;
 import characters.romans.Legionary;
 import characters.romans.Prefect;
 import characters.romans.Roman;
+
 import places.Place;
 import places.enums.PlacesType;
 
@@ -26,12 +26,24 @@ import places.enums.PlacesType;
  * such as examining places, creating characters, managing potions, etc.
  *
  * @author Lou
+ * @subauthor: Oriane
  * @version 1.0
  */
 public class ClanChiefMenu {
 
     private List<ClanChief> clanChiefs;
     private Scanner scanner;
+
+    public ClanChiefMenu(ClanChief clanChief)
+    {
+        this.clanChiefs = new ArrayList<>();
+
+        if (clanChief != null)
+        {
+            clanChiefs.add(clanChief);
+        }
+    }
+
 
     /**
      * Creates a new controller with an empty list of clan chiefs.
@@ -254,7 +266,7 @@ public class ClanChiefMenu {
 
                 if (gaulChoice == 1) {
                     newCharacter = new Druid(name, gender, height, age, strength,
-                            endurance, health, hunger, belligerence, 0);
+                            endurance, health, hunger, belligerence, 0, type);
                 } else {
                     newCharacter = new Gaul(name, gender, height, age, strength,
                             endurance, health, hunger, belligerence, 0, type);
@@ -300,9 +312,6 @@ public class ClanChiefMenu {
 
                 if (fantasyChoice == 2) {
                     newCharacter = new Lycanthrope(name, gender, height, age, strength,
-                            endurance, health, hunger, belligerence, 0, type);
-                } else {
-                    newCharacter = new FantasyCreature(name, gender, height, age, strength,
                             endurance, health, hunger, belligerence, 0, type);
                 }
                 break;
@@ -497,23 +506,22 @@ public class ClanChiefMenu {
         // 6. Effectuer le transfert
         chief.transferCharacter(selectedChar, destination);
     }
+
+    private Place createPlace(String name, double area, PlacesType type) {
+        switch (type) {
+            case BATTLEFIELD:
+               System.out.println("Création d'un champ de bataille...");
+                return null;
+
+            case ENCLOSURE:
+                System.out.println("Création d'un enclos...");
+                return null;
+
+            default:
+                System.out.println("Type de lieu non supporté pour le transfert !");
+                return null;
+        }
     }
-
-private Place createPlace(String name, double area, PlacesType type) {
-    switch (type) {
-        case BATTLEFIELD:
-           System.out.println("Création d'un champ de bataille...");
-            return null;
-
-        case ENCLOSURE:
-            System.out.println("Création d'un enclos...");
-            return null;
-
-        default:
-            System.out.println("Type de lieu non supporté pour le transfert !");
-            return null;
-    }
-}
 
     /**
      * Reads an integer from user input.

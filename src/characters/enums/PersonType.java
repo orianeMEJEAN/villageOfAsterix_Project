@@ -40,7 +40,7 @@ public enum PersonType
                         Ingredient.wine
                 );
 
-            case roman:
+            case roman, roman_fighter:
                 return EnumSet.of(
                         Ingredient.boar,
                         Ingredient.honey,
@@ -49,7 +49,14 @@ public enum PersonType
                 );
 
             case fantasy:
-
+                return EnumSet.of(
+                        Ingredient.freshFourLeafClover,
+                        Ingredient.rockOil,
+                        Ingredient.mead,
+                        Ingredient.boar,
+                        Ingredient.lobster,
+                        Ingredient.twoHeadedUnicornMilk
+                );
 
             default:
                 return null;

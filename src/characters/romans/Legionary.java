@@ -31,7 +31,8 @@ public class Legionary extends Roman {
                    int health,
                    int hunger,
                    int belligerence,
-                   int magicPotionLevel
+                   int magicPotionLevel,
+                   PersonType personType
     ) {
         super(name, gender, height, age, strength, endurance,
                 health,hunger, belligerence, magicPotionLevel,

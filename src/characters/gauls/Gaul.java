@@ -4,6 +4,7 @@ import characters.Worker;
 import characters.enums.GaulType;
 import characters.enums.Gender;
 import characters.enums.PersonType;
+import  characters.Character;
 
 /**
  * Represents a Gaul character, a cultural subgroup of characters
@@ -14,7 +15,7 @@ import characters.enums.PersonType;
  * behaviors, while delegating all common character attributes
  * and actions to the {@link characters.Character} base class.
  */
-public class Gaul extends characters.Character  implements Worker {
+public class Gaul extends Character implements Worker {
 
     // private static final double POTION_STRENGTH_MULTIPLIER = 2.5;
     private GaulType type;
@@ -35,16 +36,16 @@ public class Gaul extends characters.Character  implements Worker {
      * @param type              Gaul's type use None as a default parameter
      */
     public Gaul(String name,
-                    Gender gender,
-                    int height,
-                    int age,
-                    int strength,
-                    int endurance,
-                    int health,
-                    int hunger,
-                    int belligerence,
-                    int magicPotionLevel,
-                    GaulType type
+                Gender gender,
+                int height,
+                int age,
+                int strength,
+                int endurance,
+                int health,
+                int hunger,
+                int belligerence,
+                int magicPotionLevel,
+                GaulType type
     ) {
         super(name, gender, height, age, strength, endurance,
                 health, hunger, belligerence, magicPotionLevel,
