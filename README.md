@@ -6,7 +6,6 @@
 - [Project Presentation / Présentation](#Project-Presentation--Présentation)
 - [Teams / Équipe](#Teams--Équipe)
 - [Project Structure / Structure du projet](#Project-Structure--Structure-du-projet)
-- [Code Structure / Structure du code](#code-structure--structure-du-code)
 - [How to use / Comment l'utiliser](#How-to-use--Comment-l'utiliser)
 
 ## Project Presentation / Présentation
@@ -31,12 +30,8 @@ Ce projet a été composé par un groupe de 3 étudiants de l’IUT d’Aix-Mars
 * TORCHIN Maxence
 
 ## Project Structure / Structure du projet
-
-### **(insérer de l’archi)**
-
-## Code Structure / Structure du code
-
-### **(insérer la structure du code)**
+<img width="514" height="1146" alt="image" src="https://github.com/user-attachments/assets/fc38f1b1-37b1-44e9-910d-07e4cca14618" />
+<img width="396" height="436" alt="image" src="https://github.com/user-attachments/assets/30aae973-5005-4e53-adad-93cd193c6808" />
 
 ## How to use / Comment l'utiliser
 **EN:**
