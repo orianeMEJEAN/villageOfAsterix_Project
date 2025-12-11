@@ -7,6 +7,7 @@
 - [Teams / Équipe](#Teams--Équipe)
 - [Project Structure / Structure du projet](#Project-Structure--Structure-du-projet)
 - [How to use / Comment l'utiliser](#How-to-use--Comment-l'utiliser)
+- [UML](#UML)
 
 ## Project Presentation / Présentation
 **EN:**
@@ -42,3 +43,7 @@ Then, once you have gotten the project directly from GitHub or by cloning it, al
 **FR:**
 > Pour pouvoir utiliser le jeu, il est nécessaire d’avoir Java installé sur votre appareil. Si ce n’est pas le cas, nous vous invitons à visiter [ce site](https://www.java.com/fr/download/manual.jsp) pour pouvoir y jouer tranquillement.
 Notre projet ne contenant pas d’interface graphique et n’étant pas lié à un site web, nous vous conseillons également d’avoir un IDE installé et compatible avec Java, comme Eclipse ou IntelliJ IDEA, afin de pouvoir le lancer. Pour finir, une fois que vous aurez installé le projet soit en récupérant le code source sur github soit en le clonant, vous n’aurez qu’à exécuter **Main.java** et vous amuser. (Mettez 20 pitié).
+
+## UML
+<img width="3096" height="2336" alt="diagrammeUML-Projet" src="https://github.com/user-attachments/assets/1ec8f8ae-8743-4a4e-ac9b-a535819904c5" />
+
