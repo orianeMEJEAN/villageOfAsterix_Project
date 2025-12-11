@@ -4,6 +4,7 @@ import characters.enums.Gender;
 import characters.enums.GaulType;
 import characters.enums.PersonType;
 import characters.gauls.Gaul;
+import characters.romans.General;
 import food.enums.Ingredient;
 import magicPotion.Pot;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import javax.xml.stream.events.Characters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,52 +31,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClanChiefMenuTest {
 
     private ClanChiefMenu menu;
-    private ClanChief testChief;
-    private TestPlace testPlace;
+    private ClanChief chief;
+    private Place place;
     private ByteArrayOutputStream outputStream;
     private PrintStream originalOut;
-
-    /**
-     * Simple test implementation of Place for testing purposes.
-     */
-    private static class TestPlace extends Place {
-        public TestPlace(String name, double area, ClanChief clanChief, List<Character> characters) {
-            super(name, area, PlacesType.GAUL_VILLAGE, clanChief, characters);
-        }
-
-        @Override
-        public boolean canAccept(Character character) {
-            return true;
-        }
-
-        @Override
-        public void display() {
-            System.out.println("Test Place: " + getName());
-        }
-
-        @Override
-        public void healCharacters() {
-            getCharacters().forEach(c -> c.setHealth(c.getMaxHealth()));
-        }
-
-        @Override
-        public void feedCharacters() {
-            getCharacters().forEach(c -> c.setHunger(100));
-        }
-    }
+    List<Character> characters = new ArrayList<Character>();
 
     @BeforeEach
     void setUp() {
-        // Créer un lieu de test
-        testPlace = new TestPlace("Village Test", 1000.0, clanChief, characters);
+        Character asterix = new Gaul("Astérix", Gender.MALE, 150, 21, 10, 100, 100, 0, 0, 0, GaulType.NONE);
+        Character obelix = new Gaul("Obélix",  Gender.MALE, 190, 23, 100, 50, 90, 0, 0, 100, GaulType.NONE);
+        Character caesar = new General("César", Gender.MALE, 160, 35, 60, 70, 100, 10, 0, 0);
 
-        // Créer un chef de clan de test
-        testChief = new ClanChief("Abraracourcix", Gender.MALE, 45, testPlace);
+        characters.add(asterix);
+        characters.add(obelix);
 
-        // Créer le menu avec le chef
-        menu = new ClanChiefMenu(testChief);
+        place = new Place("Village Gaul", 1000.0, PlacesType.GAUL_VILLAGE,characters);
+        chief = new ClanChief("Abraracourcix", Gender.MALE, 45, place);
+        menu = new ClanChiefMenu(chief);
 
-        // Capturer la sortie standard
         originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -82,19 +57,16 @@ class ClanChiefMenuTest {
 
     @AfterEach
     void tearDown() {
-        // Restaurer la sortie standard
         System.setOut(originalOut);
 
-        // Fermer le menu si nécessaire
         try {
             menu.close();
         } catch (Exception e) {
-            // Ignorer les erreurs de fermeture
         }
     }
 
     /**
-     * Simule une entrée utilisateur.
+     * Simulates a user entry
      */
     private void simulateInput(String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
@@ -102,14 +74,14 @@ class ClanChiefMenuTest {
     }
 
     /**
-     * Récupère la sortie console.
+     * Retrieves the console output.
      */
     private String getOutput() {
         return outputStream.toString();
     }
 
     /**
-     * Réinitialise la capture de sortie.
+     * Resets the output capture.
      */
     private void resetOutput() {
         outputStream.reset();
@@ -118,32 +90,27 @@ class ClanChiefMenuTest {
     @Test
     void testConstructorWithClanChief() {
         assertNotNull(menu);
-        // Le chef devrait être ajouté à la liste
     }
 
     @Test
     void testConstructorWithNullClanChief() {
         ClanChiefMenu emptyMenu = new ClanChiefMenu(null);
         assertNotNull(emptyMenu);
-        // Devrait créer un menu vide sans erreur
     }
 
     @Test
     void testAddClanChief() {
-        ClanChief newChief = new ClanChief("Agecanonix", Gender.MALE, 80, testPlace);
+        ClanChief newChief = new ClanChief("Agecanonix", Gender.MALE, 80, place);
         menu.addClanChief(newChief);
 
-        // Tester l'affichage de tous les chefs
         simulateInput("2\n0\n");
 
-        // La méthode start() devrait afficher les chefs
-        // mais nous ne pouvons pas la tester complètement sans interaction
     }
 
     @Test
     void testExaminePlaceWithNoCharacters() {
         resetOutput();
-        testChief.examinePlace();
+        chief.examinePlace();
 
         String output = getOutput();
         assertTrue(output.contains("EXAMEN DU LIEU"));
@@ -153,13 +120,12 @@ class ClanChiefMenuTest {
 
     @Test
     void testExaminePlaceWithCharacters() {
-        // Ajouter un personnage au lieu
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
         resetOutput();
-        testChief.examinePlace();
+        chief.examinePlace();
 
         String output = getOutput();
         assertTrue(output.contains("Astérix"));
@@ -171,10 +137,10 @@ class ClanChiefMenuTest {
                 20, 15, 100, 100, 8, 0, GaulType.NONE);
 
         resetOutput();
-        boolean result = testChief.createCharacter(newGaul);
+        boolean result = chief.createCharacter(newGaul);
 
         assertTrue(result);
-        assertTrue(testPlace.getCharacters().contains(newGaul));
+        assertTrue(place.getCharacters().contains(newGaul));
         String output = getOutput();
         assertTrue(output.contains("Obélix"));
         assertTrue(output.contains("créé"));
@@ -182,13 +148,12 @@ class ClanChiefMenuTest {
 
     @Test
     void testHealCharactersInPlace() {
-        // Ajouter un personnage blessé
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 50, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
         resetOutput();
-        testChief.healCharactersInPlace();
+        chief.healCharactersInPlace();
 
         assertEquals(gaul.getMaxHealth(), gaul.getHealth());
         String output = getOutput();
@@ -198,15 +163,16 @@ class ClanChiefMenuTest {
 
     @Test
     void testFeedCharactersInPlace() {
-        // Ajouter un personnage affamé
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 50, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
+
+        gaul.setHunger(49);
 
         resetOutput();
-        testChief.feedCharactersInPlace();
+        chief.feedCharactersInPlace();
 
-        assertEquals(100, gaul.getHunger());
+        assertEquals(50, gaul.getHunger());
         String output = getOutput();
         assertTrue(output.contains("nourrit"));
         assertTrue(output.contains("nourris"));
@@ -214,19 +180,27 @@ class ClanChiefMenuTest {
 
     @Test
     void testGivePotionToCharacterSuccess() {
-        // Ajouter un personnage
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
-        // Créer une potion
         Pot pot = new Pot();
         pot.addDose(5);
+
         pot.addIngredient(Ingredient.mistletoe);
+        pot.addIngredient(Ingredient.carrots);
+        pot.addIngredient(Ingredient.salt);
+        pot.addIngredient(Ingredient.freshFourLeafClover);
+        pot.addIngredient(Ingredient.moderatelyFreshFish);
+        pot.addIngredient(Ingredient.rockOil);
+        pot.addIngredient(Ingredient.honey);
+        pot.addIngredient(Ingredient.mead);
+        pot.addIngredient(Ingredient.secretIngredient);
+
         pot.brewPotion();
 
         resetOutput();
-        boolean result = testChief.givePotionToCharacter(gaul, pot);
+        boolean result = chief.givePotionToCharacter(gaul, pot);
 
         assertTrue(result);
         String output = getOutput();
@@ -235,7 +209,6 @@ class ClanChiefMenuTest {
 
     @Test
     void testGivePotionToCharacterNotInPlace() {
-        // Créer un personnage qui n'est PAS dans le lieu
         Character gaul = new Gaul("Panoramix", Gender.MALE, 170, 60,
                 10, 10, 100, 100, 5, 0, GaulType.DRUID);
 
@@ -243,7 +216,7 @@ class ClanChiefMenuTest {
         pot.addDose(5);
 
         resetOutput();
-        boolean result = testChief.givePotionToCharacter(gaul, pot);
+        boolean result = chief.givePotionToCharacter(gaul, pot);
 
         assertFalse(result);
         String output = getOutput();
@@ -254,12 +227,12 @@ class ClanChiefMenuTest {
     void testGivePotionToCharacterEmptyPot() {
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
         Pot emptyPot = new Pot();
 
         resetOutput();
-        boolean result = testChief.givePotionToCharacter(gaul, emptyPot);
+        boolean result = chief.givePotionToCharacter(gaul, emptyPot);
 
         assertFalse(result);
         String output = getOutput();
@@ -268,24 +241,17 @@ class ClanChiefMenuTest {
 
     @Test
     void testTransferCharacterSuccess() {
-        // Créer un personnage dans le lieu d'origine
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
-        // Créer un lieu de destination (BATTLEFIELD)
-        TestPlace battlefield = new TestPlace("Champ de bataille", 500.0, clanChief, characters) {
-            @Override
-            public PlacesType getPlaceType() {
-                return PlacesType.BATTLEFIELD;
-            }
-        };
+        Place battlefield = new Place("Champ de bataille", 500.0, PlacesType.BATTLEFIELD, new ArrayList<>());
 
         resetOutput();
-        boolean result = testChief.transferCharacter(gaul, battlefield);
+        boolean result = chief.transferCharacter(gaul, battlefield);
 
         assertTrue(result);
-        assertFalse(testPlace.getCharacters().contains(gaul));
+        assertFalse(place.getCharacters().contains(gaul));
         assertTrue(battlefield.getCharacters().contains(gaul));
         String output = getOutput();
         assertTrue(output.contains("transféré"));
@@ -296,15 +262,10 @@ class ClanChiefMenuTest {
         Character gaul = new Gaul("Obélix", Gender.MALE, 180, 35,
                 20, 15, 100, 100, 8, 0, GaulType.NONE);
 
-        TestPlace battlefield = new TestPlace("Champ de bataille", 500.0, clanChief, characters) {
-            @Override
-            public PlacesType getPlaceType() {
-                return PlacesType.BATTLEFIELD;
-            }
-        };
+        Place battlefield = new Place("Champ de bataille", 500.0, PlacesType.BATTLEFIELD, characters);
 
         resetOutput();
-        boolean result = testChief.transferCharacter(gaul, battlefield);
+        boolean result = chief.transferCharacter(gaul, battlefield);
 
         assertFalse(result);
         String output = getOutput();
@@ -315,13 +276,12 @@ class ClanChiefMenuTest {
     void testTransferCharacterInvalidDestination() {
         Character gaul = new Gaul("Astérix", Gender.MALE, 165, 35,
                 15, 10, 100, 100, 7, 0, GaulType.NONE);
-        testPlace.addCharacter(gaul);
+        place.addCharacter(gaul);
 
-        // Lieu avec type invalide (VILLAGE)
-        TestPlace invalidPlace = new TestPlace("Village", 500.0, clanChief, characters);
+        Place invalidPlace = new Place("Village", 500.0, PlacesType.GAUL_VILLAGE, characters);
 
         resetOutput();
-        boolean result = testChief.transferCharacter(gaul, invalidPlace);
+        boolean result = chief.transferCharacter(gaul, invalidPlace);
 
         assertFalse(result);
         String output = getOutput();
@@ -330,10 +290,9 @@ class ClanChiefMenuTest {
 
     @Test
     void testAskDruidToBrewPotionSuccess() {
-        // Créer un druide
         Character druid = new Gaul("Panoramix", Gender.MALE, 170, 60,
                 10, 10, 100, 100, 5, 0, GaulType.DRUID);
-        testPlace.addCharacter(druid);
+        place.addCharacter(druid);
 
         Pot pot = new Pot();
         List<Ingredient> ingredients = List.of(
@@ -343,9 +302,8 @@ class ClanChiefMenuTest {
         );
 
         resetOutput();
-        boolean result = testChief.askDruidToBrewPotion(druid, pot, ingredients);
+        boolean result = chief.askDruidToBrewPotion(druid, pot, ingredients);
 
-        // Le résultat dépend de la logique de création de potion
         String output = getOutput();
         assertTrue(output.contains("préparer") || output.contains("potion"));
     }
@@ -359,7 +317,7 @@ class ClanChiefMenuTest {
         List<Ingredient> ingredients = List.of(Ingredient.mistletoe);
 
         resetOutput();
-        boolean result = testChief.askDruidToBrewPotion(druid, pot, ingredients);
+        boolean result = chief.askDruidToBrewPotion(druid, pot, ingredients);
 
         assertFalse(result);
         String output = getOutput();
@@ -368,25 +326,24 @@ class ClanChiefMenuTest {
 
     @Test
     void testGetAndSetPlace() {
-        Place newPlace = new TestPlace("Nouveau Village", 2000.0, clanChief, characters);
-        testChief.setPlace(newPlace);
+        Place newPlace = new Place("Nouveau Village", 2000.0, PlacesType.GAUL_VILLAGE, characters);
+        chief.setPlace(newPlace);
 
-        assertEquals(newPlace, testChief.getPlace());
+        assertEquals(newPlace, chief.getPlace());
     }
 
     @Test
     void testToString() {
-        String result = testChief.toString();
+        String result = chief.toString();
 
         assertNotNull(result);
         assertTrue(result.contains("ClanChief"));
         assertTrue(result.contains("Abraracourcix"));
-        assertTrue(result.contains("Village Test"));
+        assertTrue(result.contains("Village Gaul"));
     }
 
     @Test
     void testClanChiefMenuClose() {
-        // S'assurer que close() ne génère pas d'exception
         assertDoesNotThrow(() -> menu.close());
     }
 }

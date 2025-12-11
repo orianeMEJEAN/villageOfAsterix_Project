@@ -8,6 +8,7 @@ import places.Place;
 import places.enums.PlacesType;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a clan chief who leads a place and manages its inhabitants.
@@ -159,7 +160,7 @@ public class ClanChief extends Character {
      * Transfers a character from this place to a battlefield or enclosure.
      *
      * @param character       the character to transfer
-     * @param destinationPlace the destination (must be BATTLEFIELD or ENCLOSURE)
+     * @param destinationPlace the destination place candidate
      * @return true if transfer was successful, false otherwise
      */
     public boolean transferCharacter(Character character, Place destinationPlace) {
@@ -216,7 +217,8 @@ public class ClanChief extends Character {
      * Displays all food items available in the place.
      */
     private void displayFoodsInPlace() {
-        List<Ingredient> foods = place.getFoods();
+        Set<Ingredient> foods = place.getFoods();
+
         if (foods == null || foods.isEmpty()) {
             System.out.println("Aucun aliment disponible.");
         } else {

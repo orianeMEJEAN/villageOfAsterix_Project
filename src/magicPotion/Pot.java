@@ -209,4 +209,13 @@ public class Pot
     public MagicPotion getMagicPotion(){
         return this.magicPotion;
     }
+
+    /**
+     * Set the number of doses in the pot
+     *
+     * @param nbDoses
+     */
+    public void setNbDoses(int nbDoses){
+        this.nbDoses = nbDoses;
+    }
 }

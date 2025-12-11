@@ -42,8 +42,6 @@ public class Prefect extends Roman implements Leader {
     /**
      * Makes the prefect lead.
      *
-     * TODO
-     * Une vrai méthode de leader
      */
     @Override
     public void lead() {

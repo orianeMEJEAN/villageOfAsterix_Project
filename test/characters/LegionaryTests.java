@@ -54,8 +54,7 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0,
-                PersonType.roman
+                0
         );
 
         Legionary brutusSoldier = new Legionary(
@@ -68,8 +67,7 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0,
-                PersonType.roman
+                0
         );
 
         int healthBefore = brutusSoldier.getHealth();
@@ -95,8 +93,7 @@ public class LegionaryTests {
                 100,
                 8,
                 4,
-                0,
-                PersonType.roman
+                0
         );
 
         soldier.setHunger(5);
@@ -123,8 +120,7 @@ public class LegionaryTests {
                 100,
                 5,
                 4,
-                0,
-                PersonType.roman
+                0
         );
 
         Pot pot = createBasicFullPot();
@@ -152,8 +148,7 @@ public class LegionaryTests {
                 1,
                 5,
                 4,
-                0,
-                PersonType.roman
+                0
         );
 
         soldier.fight(soldier);

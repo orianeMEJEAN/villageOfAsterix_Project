@@ -41,8 +41,6 @@ public class General extends Roman implements Leader {
     /**
      * Makes the General lead.
      *
-     * TODO
-     * Une vrai méthode de leader
      */
     @Override
     public void lead() {

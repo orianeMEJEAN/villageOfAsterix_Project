@@ -6,8 +6,7 @@ import characters.enums.PersonType;
 /**
  * This class helps to create a new Fantasy Creature
  */
-public abstract class FantasyCreature extends characters.Character {
-
+public class FantasyCreature extends characters.Character {
     /**
      * Creates a new character with all base attributes.
      *

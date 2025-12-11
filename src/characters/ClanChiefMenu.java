@@ -32,15 +32,12 @@ import places.enums.PlacesType;
  */
 public class ClanChiefMenu {
 
-    private List<ClanChief> clanChiefs;
-    private Scanner scanner;
+    private List<ClanChief> clanChiefs = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
 
     public ClanChiefMenu(ClanChief clanChief)
     {
-        this.clanChiefs = new ArrayList<>();
-
-        if (clanChief != null)
-        {
+        if (clanChief != null) {
             clanChiefs.add(clanChief);
         }
     }
@@ -84,9 +81,7 @@ public class ClanChiefMenu {
      * Displays the main menu.
      */
     private void displayMainMenu() {
-        System.out.println("\n╔════════════════════════════════════════╗");
-        System.out.println("║   GESTION DES CHEFS DE CLAN            ║");
-        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println("== GESTION DES CHEFS DE CLAN == ");
         System.out.println("1. Sélectionner un chef de clan");
         System.out.println("2. Afficher tous les chefs de clan");
         System.out.println("0. Quitter");
@@ -504,7 +499,6 @@ public class ClanChiefMenu {
             return;
         }
 
-        // 6. Effectuer le transfert
         chief.transferCharacter(selectedChar, destination);
     }
 
@@ -546,6 +540,8 @@ public class ClanChiefMenu {
      * Closes the scanner.
      */
     public void close() {
-        scanner.close();
+        if (scanner != null) {
+            scanner.close();
+        }
     }
 }

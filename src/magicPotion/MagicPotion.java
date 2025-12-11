@@ -255,5 +255,4 @@ public class MagicPotion {
     public int getSpecialIngredientsThreshold() {
         return specialIngredientsThreshold;
     }
-
 }

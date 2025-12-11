@@ -6,5 +6,4 @@ public enum GaulType {
     INNKEEPER,
     DRUID,
     BLACKSMITH
-
 }

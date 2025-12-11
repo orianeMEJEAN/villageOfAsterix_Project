@@ -48,8 +48,7 @@ public class Druid extends Gaul implements Leader {
     }
 
     /**
-     *  Makes the Druid lead (NOT IMPLEMENTED YET)
-     *  TODO
+     *  Makes the Druid lead
      */
     public void lead(){
         System.out.println(getName() + " is leading...");
@@ -86,4 +85,8 @@ public class Druid extends Gaul implements Leader {
         pot.brewPotion();
     }
 
+    public void givePotion(Character target, Pot pot)
+    {
+        target.drinkPotion(pot);
+    }
 }

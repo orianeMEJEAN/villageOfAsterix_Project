@@ -47,44 +47,54 @@ public class TheaterOfWar
 
     /**
      * Displays the list of all places in the theater
+     *
+     * @return the list
      */
-    public void showPlace()
+    public String showPlace()
     {
-        System.out.println("== Liste des Lieux ==");
-        for (Place place : places)
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Liste des Lieux\n");
+
+        for (Place p : places)
         {
-            place.display();
+            sb.append(p.getName());
         }
+        return sb.toString();
     }
 
     /**
      * Calculates and displays the total number of characters present in all places
      */
-    public void showNumberOfCharacters()
+    public String showNumberOfCharacters()
     {
         int total = 0;
         for (Place place : places)
         {
             total += place.getCharacters().size();
         }
-        System.out.println("Le nombre total de personnage est de " + total);
+        return "Le nombre total de personnage est de " + total;
     }
 
     /**
      * Displays all characters present in each place of the theater
      * For each place, lists the name and type of each character
      */
-    public void showCharactersAllPlaces()
+    public String showCharactersAllPlaces()
     {
+        StringBuilder sb = new StringBuilder();
+
         for (Place place : places)
         {
-            System.out.println("> Lieu : " + place.getName());
+            sb.append("> Lieu : ").append(place.getName()).append("\n");
+
             for (Character character : place.getCharacters())
             {
-                System.out.println(">> Personnage : " + character.getName()
-                + " (" + character.getPersonType() + ")");
+                sb.append(">> Personnage : ").append(character.getName()).append(" (").append(character.getPersonType()).append(")");
             }
         }
+
+        return sb.toString();
     }
 
     /**

@@ -41,7 +41,7 @@ class ClanChiefTest {
 
     @BeforeEach
     void setUp() {
-        village = new Place("Village", 50, PlacesType.GAUL_VILLAGE);
+        village = new Place("Village", 50, PlacesType.GAUL_VILLAGE );
         battlefield = new Place("Champ de bataille", 100, PlacesType.BATTLEFIELD);
         enclosure = new Place("Enclos", 30, PlacesType.ENCLOSURE);
 
@@ -218,19 +218,6 @@ class ClanChiefTest {
 
         Pot pot = new Pot();
 
-        pot.addIngredient(Ingredient.mistletoe);
-        pot.addIngredient(Ingredient.carrots);
-        pot.addIngredient(Ingredient.salt);
-        pot.addIngredient(Ingredient.freshFourLeafClover);
-        pot.addIngredient(Ingredient.moderatelyFreshFish);
-        pot.addIngredient(Ingredient.rockOil);
-        pot.addIngredient(Ingredient.honey);
-        pot.addIngredient(Ingredient.mead);
-        pot.addIngredient(Ingredient.secretIngredient);
-
-        pot.brewPotion();
-
-
         boolean result = clanChief.givePotionToCharacter(gaul, pot);
 
         assertFalse(result);
@@ -277,7 +264,7 @@ class ClanChiefTest {
     @Test
     void testTransferCharacter_InvalidDestination() {
         village.addCharacter(gaul);
-        Place anotherVillage = new Place("Autre Village", GAUL_VILLAGE, 50);
+        Place anotherVillage = new Place("Autre Village", 50, PlacesType.GAUL_VILLAGE);
 
         boolean result = clanChief.transferCharacter(gaul, anotherVillage);
 
@@ -337,7 +324,7 @@ class ClanChiefTest {
 
     @Test
     void testSetPlace() {
-        Place newPlace = new Place("Nouveau Village",  40, placeType.GAUL_VILLAGE,);
+        Place newPlace = new Place("Nouveau Village",  40, PlacesType.GAUL_VILLAGE);
 
         clanChief.setPlace(newPlace);
 
